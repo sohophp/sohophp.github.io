@@ -8,8 +8,8 @@ subtitle: ''
 description: ''
 keywords:
 author: sohophp@gmail.com
-language: zh-cn
-timezone: 'Asia/Chongqing'
+language: en
+timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
