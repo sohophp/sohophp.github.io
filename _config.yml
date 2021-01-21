@@ -9,7 +9,7 @@ description: ''
 keywords:
 author: sohophp@gmail.com
 language: zh-cn
-timezone: '+8'
+timezone: 'Asia/Chongqing'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
