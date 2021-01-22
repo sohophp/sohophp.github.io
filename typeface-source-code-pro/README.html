@@ -1,0 +1,16 @@
+<blockquote>
+<p>The Typefaces project is now deprecated.</p>
+<p>@DecliningLotus created<br><a href="https://github.com/fontsource/fontsource">FontSource</a> which provides the<br>same functionality as Typefaces but with automated releases &amp; richer<br>support for importing specific weights, styles, or language subsets.</p>
+<p>To start using Fontsource, replace in your package.json any instances of<br>“typeface-source-code-pro” with “fontsource-source-code-pro”.</p>
+<p>Then change imports from “import ‘typeface-source-code-pro’” to “import ‘fontsource-source-code-pro/latin.css’”.</p>
+<p>Typeface packages will continue working indefinitely so no immediate<br>changes are necessary.</p>
+</blockquote>
+<h1 id="typeface-source-code-pro"><a href="#typeface-source-code-pro" class="headerlink" title="typeface-source-code-pro"></a>typeface-source-code-pro</h1><p>The CSS and web font files to easily self-host “Source Code Pro”.</p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p><code>npm install --save typeface-source-code-pro</code></p>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><p>Typefaces assume you’re using webpack to process CSS and files. Each typeface<br>package includes all necessary font files (woff2, woff) and a CSS file with<br>font-face declarations pointing at these files.</p>
+<p>You will need to have webpack setup to load css and font files. Many tools built<br>with Webpack will work out of the box with Typefaces such as <a href="https://github.com/gatsbyjs/gatsby">Gatsby</a><br>and <a href="https://github.com/facebookincubator/create-react-app">Create React App</a>.</p>
+<p>To use, simply require the package in your project’s entry file e.g.</p>
+<pre><code class="javascript">// Load Source Code Pro typeface
+require(&#39;typeface-source-code-pro&#39;)</code></pre>
+<h2 id="About-the-Typefaces-project"><a href="#About-the-Typefaces-project" class="headerlink" title="About the Typefaces project."></a>About the Typefaces project.</h2><p>Our goal is to add all open source fonts to NPM to simplify using great fonts in<br>our web projects. We’re currently maintaining 1036 typeface packages<br>including all typefaces on Google Fonts.</p>
+<p>If your favorite typeface isn’t published yet, <a href="https://github.com/KyleAMathews/typefaces">let us know</a><br>and we’ll add it!</p>
