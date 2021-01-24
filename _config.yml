@@ -9,6 +9,7 @@ description: ''
 keywords:
 author: sohophp@gmail.com
 language: en
+# Asia/Chongqing
 timezone: ''
 
 # URL
@@ -41,7 +42,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
