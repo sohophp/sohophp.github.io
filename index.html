@@ -6,6 +6,10 @@
   
   <title>sohophp.github.io</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="alternate" type="application/rss+xml" title="sohophp.github.io" href="http://sohophp.github.io/rss.xml" />
+  <link rel="alternate" type="application/atom+xml" title="sohophp.github.io" href="http://sohophp.github.io/atom.xml" />
+  <link rel="alternate" type="application/json" title="sohophp.github.io" href="http://sohophp.github.io/feed.json" />
+
   <meta property="og:type" content="website">
 <meta property="og:title" content="sohophp.github.io">
 <meta property="og:url" content="http://sohophp.github.io/index.html">
@@ -14,7 +18,7 @@
 <meta property="article:author" content="sohophp@gmail.com">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="sohophp.github.io" type="application/atom+xml">
+    
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -55,7 +59,7 @@
           <a class="main-nav-link" href="/archives">Archives</a>
         
       </nav>
-      <!-- <nav id="sub-nav">
+      <nav id="sub-nav">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
@@ -63,7 +67,7 @@
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sohophp.github.io"></form>
-      </div> -->
+      </div>
     </div>
   </div>
 </header>
@@ -71,12 +75,69 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo图片插件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" class="article-date">
+  <time class="dt-published" datetime="2021-01-24T12:18:32.000Z" itemprop="datePublished">2021-01-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/">hexo图片插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>卸载旧的图片插件（如果有） 例如 <code>hexo-asset-image</code>或者<code>hexo-simple-image</code> ，这两个图片网址都有错误 </li>
+<li>修改_config.yml 的 <code>post_asset_folder: true</code></li>
+<li><code>hexo new post &quot;test&quot;</code> 试一个会自动生成source/_posts/test文件夹用来存放图片文件</li>
+<li><code>npm install hexo-image-link --save</code> 安装插件</li>
+<li>hexo server –debug 启动server</li>
+</ol>
+<img src="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/logo20210123204140.png" class="" title="logo">
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sohophp.github.io/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" data-id="ckkapeufc000110rp2owe77du" data-title="hexo图片插件" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Image/" rel="tag">Image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/01/21/hexo/" class="article-date">
   <time class="dt-published" datetime="2021-01-21T15:06:59.000Z" itemprop="datePublished">2021-01-21</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -98,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sohophp.github.io/2021/01/21/hexo/" data-id="ckk8k7dj100000vt2axrwfdrc" data-title="什么是 Hexo？" class="article-share-link">Share</a>
+      <a data-url="http://sohophp.github.io/2021/01/21/hexo/" data-id="ckkapeuf5000010rp74aee2ac" data-title="什么是 Hexo？" class="article-share-link">Share</a>
       
       
       
@@ -119,13 +180,20 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+    </div>
+  </div>
+
 
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image/" rel="tag">Image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li></ul>
     </div>
   </div>
 
@@ -135,7 +203,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a>
+      <a href="/tags/Hexo/" style="font-size: 20px;">Hexo</a> <a href="/tags/Image/" style="font-size: 10px;">Image</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a>
     </div>
   </div>
 
@@ -155,6 +223,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/">hexo图片插件</a>
+          </li>
         
           <li>
             <a href="/2021/01/21/hexo/">什么是 Hexo？</a>
