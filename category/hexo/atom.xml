@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://sohophp.github.io</id>
-    <title>sohophp.github.io • Posts by &#34;hexo&#34; category</title>
-    <link href="http://sohophp.github.io" />
+    <id>http://www.sohophp.app</id>
+    <title>SOHOPHP • Posts by &#34;hexo&#34; category</title>
+    <link href="http://www.sohophp.app" />
     <updated>2021-01-24T12:18:32.000Z</updated>
+    <category term="Visual Sudio Code" />
+    <category term="PHP" />
     <category term="Hexo" />
     <category term="Markdown" />
     <category term="Image" />
     <category term="Javascript" />
     <entry>
-        <id>http://sohophp.github.io/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/</id>
+        <id>http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/</id>
         <title>hexo图片插件</title>
-        <link rel="alternate" href="http://sohophp.github.io/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/"/>
+        <link rel="alternate" href="http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/"/>
         <content type="html">&lt;ol&gt;
 &lt;li&gt;卸载旧的图片插件（如果有） 例如 &lt;code&gt;hexo-asset-image&lt;/code&gt;或者&lt;code&gt;hexo-simple-image&lt;/code&gt; ，这两个图片网址都有错误 &lt;/li&gt;
 &lt;li&gt;修改_config.yml 的 &lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/li&gt;
@@ -28,9 +30,9 @@
         <updated>2021-01-24T12:18:32.000Z</updated>
     </entry>
     <entry>
-        <id>http://sohophp.github.io/2021/01/21/hexo/</id>
+        <id>http://www.sohophp.app/2021/01/21/hexo/</id>
         <title>什么是 Hexo？</title>
-        <link rel="alternate" href="http://sohophp.github.io/2021/01/21/hexo/"/>
+        <link rel="alternate" href="http://www.sohophp.app/2021/01/21/hexo/"/>
         <content type="html">&lt;p&gt;&lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt; 是一个快速、简洁且高效的博客框架。Hexo 使用 &lt;a href=&#34;https://daringfireball.net/projects/markdown/&#34;&gt;Markdown&lt;/a&gt;（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。&lt;/p&gt;
 </content>
         <category term="Hexo" />

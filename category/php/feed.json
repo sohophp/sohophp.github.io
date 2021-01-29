@@ -1,6 +1,6 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "SOHOPHP",
+    "title": "SOHOPHP • All posts by \"php\" category",
     "description": "",
     "home_page_url": "http://www.sohophp.app",
     "items": [
@@ -13,29 +13,6 @@
             "tags": [
                 "Visual Sudio Code",
                 "PHP"
-            ]
-        },
-        {
-            "id": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
-            "url": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
-            "title": "hexo图片插件",
-            "date_published": "2021-01-24T12:18:32.000Z",
-            "content_html": "<ol>\n<li>卸载旧的图片插件（如果有） 例如 <code>hexo-asset-image</code>或者<code>hexo-simple-image</code> ，这两个图片网址都有错误 </li>\n<li>修改_config.yml 的 <code>post_asset_folder: true</code></li>\n<li><code>hexo new post &quot;test&quot;</code> 试一个会自动生成source/_posts/test文件夹用来存放图片文件</li>\n<li><code>npm install hexo-image-link --save</code> 安装插件</li>\n<li>hexo server –debug 启动server</li>\n</ol>\n<img src=\"/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/logo20210123204140.png\" class=\"\" title=\"logo\">\n\n",
-            "tags": [
-                "Hexo",
-                "Image",
-                "Javascript"
-            ]
-        },
-        {
-            "id": "http://www.sohophp.app/2021/01/21/hexo/",
-            "url": "http://www.sohophp.app/2021/01/21/hexo/",
-            "title": "什么是 Hexo？",
-            "date_published": "2021-01-21T15:06:59.000Z",
-            "content_html": "<p><a href=\"https://hexo.io/\">Hexo</a> 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href=\"https://daringfireball.net/projects/markdown/\">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>\n",
-            "tags": [
-                "Hexo",
-                "Markdown"
             ]
         }
     ]
