@@ -2,11 +2,11 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "SOHOPHP • All posts by \"javascript\" tag",
     "description": "",
-    "home_page_url": "http://www.sohophp.app",
+    "home_page_url": "https://www.sohophp.app",
     "items": [
         {
-            "id": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
-            "url": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
+            "id": "https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
+            "url": "https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
             "title": "hexo图片插件",
             "date_published": "2021-01-24T12:18:32.000Z",
             "content_html": "<ol>\n<li>卸载旧的图片插件（如果有） 例如 <code>hexo-asset-image</code>或者<code>hexo-simple-image</code> ，这两个图片网址都有错误 </li>\n<li>修改_config.yml 的 <code>post_asset_folder: true</code></li>\n<li><code>hexo new post &quot;test&quot;</code> 试一个会自动生成source/_posts/test文件夹用来存放图片文件</li>\n<li><code>npm install hexo-image-link --save</code> 安装插件</li>\n<li>hexo server –debug 启动server</li>\n</ol>\n<img src=\"/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/logo20210123204140.png\" class=\"\" title=\"logo\">\n\n",

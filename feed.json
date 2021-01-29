@@ -2,11 +2,11 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "SOHOPHP",
     "description": "",
-    "home_page_url": "http://www.sohophp.app",
+    "home_page_url": "https://www.sohophp.app",
     "items": [
         {
-            "id": "http://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/",
-            "url": "http://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/",
+            "id": "https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/",
+            "url": "https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/",
             "title": "Visual Studio Code PHP需要的插件",
             "date_published": "2021-01-29T16:46:32.000Z",
             "content_html": "<h2 id=\"Markdown-Preview-Enhanced\"><a href=\"#Markdown-Preview-Enhanced\" class=\"headerlink\" title=\"Markdown Preview Enhanced\"></a>Markdown Preview Enhanced</h2><h3 id=\"引用介绍\"><a href=\"#引用介绍\" class=\"headerlink\" title=\"引用介绍:\"></a>引用介绍:</h3><p>Markdown Preview Enhanced 是一款为 Atom 以及 Visual Studio Code 编辑器编写的超级强大的 Markdown 插件。 这款插件意在让你拥有飘逸的 Markdown 写作体验。 </p>\n<p><img src=\"https://user-images.githubusercontent.com/1908863/28227953-eb6eefa4-68a1-11e7-8769-96ea83facf3b.png\" alt=\"Markdown Preview Enhanced\" title=\"Markdown Preview Enhanced 官网图片\"></p>\n<h3 id=\"插件网址\"><a href=\"#插件网址\" class=\"headerlink\" title=\"插件网址\"></a>插件网址</h3><p><a href=\"https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/\">https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/</a> </p>\n<h3 id=\"使用体验\"><a href=\"#使用体验\" class=\"headerlink\" title=\"使用体验\"></a>使用体验</h3><p>用来编辑Markdown文档时预览功能 </p>\n<hr>\n<h2 id=\"IntelliJ-IDEA-Keybindings\"><a href=\"#IntelliJ-IDEA-Keybindings\" class=\"headerlink\" title=\"IntelliJ IDEA Keybindings\"></a>IntelliJ IDEA Keybindings</h2><h3 id=\"引用介绍-1\"><a href=\"#引用介绍-1\" class=\"headerlink\" title=\"引用介绍\"></a>引用介绍</h3><p>Port of IntelliJ IDEA key bindings for VS Code. Includes keymaps for popular JetBrains products like IntelliJ Ultimate, WebStorm, PyCharm, PHP Storm, etc.</p>\n<p><img src=\"https://github.com/kasecato/vscode-intellij-idea-keybindings/raw/master/images/usage_intellij_importer.gif\" alt=\"引用 IntelliJ IDEA Keybindings 图片\"></p>\n<h3 id=\"插件网址-1\"><a href=\"#插件网址-1\" class=\"headerlink\" title=\"插件网址\"></a>插件网址</h3><p><a href=\"https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings\">https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings</a></p>\n<h3 id=\"使用体验-1\"><a href=\"#使用体验-1\" class=\"headerlink\" title=\"使用体验\"></a>使用体验</h3><p>习惯了 IntelliJ IDEA (PHPStorm) 的快捷键，安装它后常用快捷键会和PHPStorm相同</p>\n<hr>\n<p><strong><em>待更新。。。</em></strong></p>\n",
@@ -16,8 +16,8 @@
             ]
         },
         {
-            "id": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
-            "url": "http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
+            "id": "https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
+            "url": "https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/",
             "title": "hexo图片插件",
             "date_published": "2021-01-24T12:18:32.000Z",
             "content_html": "<ol>\n<li>卸载旧的图片插件（如果有） 例如 <code>hexo-asset-image</code>或者<code>hexo-simple-image</code> ，这两个图片网址都有错误 </li>\n<li>修改_config.yml 的 <code>post_asset_folder: true</code></li>\n<li><code>hexo new post &quot;test&quot;</code> 试一个会自动生成source/_posts/test文件夹用来存放图片文件</li>\n<li><code>npm install hexo-image-link --save</code> 安装插件</li>\n<li>hexo server –debug 启动server</li>\n</ol>\n<img src=\"/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/logo20210123204140.png\" class=\"\" title=\"logo\">\n\n",
@@ -28,8 +28,8 @@
             ]
         },
         {
-            "id": "http://www.sohophp.app/2021/01/21/hexo/",
-            "url": "http://www.sohophp.app/2021/01/21/hexo/",
+            "id": "https://www.sohophp.app/2021/01/21/hexo/",
+            "url": "https://www.sohophp.app/2021/01/21/hexo/",
             "title": "什么是 Hexo？",
             "date_published": "2021-01-21T15:06:59.000Z",
             "content_html": "<p><a href=\"https://hexo.io/\">Hexo</a> 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href=\"https://daringfireball.net/projects/markdown/\">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>\n",

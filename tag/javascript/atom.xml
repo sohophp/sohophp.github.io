@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://www.sohophp.app</id>
+    <id>https://www.sohophp.app</id>
     <title>SOHOPHP • Posts by &#34;javascript&#34; tag</title>
-    <link href="http://www.sohophp.app" />
+    <link href="https://www.sohophp.app" />
     <updated>2021-01-24T12:18:32.000Z</updated>
     <category term="Visual Sudio Code" />
     <category term="PHP" />
@@ -11,9 +11,9 @@
     <category term="Image" />
     <category term="Javascript" />
     <entry>
-        <id>http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/</id>
+        <id>https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/</id>
         <title>hexo图片插件</title>
-        <link rel="alternate" href="http://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/"/>
+        <link rel="alternate" href="https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/"/>
         <content type="html">&lt;ol&gt;
 &lt;li&gt;卸载旧的图片插件（如果有） 例如 &lt;code&gt;hexo-asset-image&lt;/code&gt;或者&lt;code&gt;hexo-simple-image&lt;/code&gt; ，这两个图片网址都有错误 &lt;/li&gt;
 &lt;li&gt;修改_config.yml 的 &lt;code&gt;post_asset_folder: true&lt;/code&gt;&lt;/li&gt;
