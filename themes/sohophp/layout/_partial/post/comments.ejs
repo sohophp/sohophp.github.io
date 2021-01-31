@@ -1,0 +1,15 @@
+<div id="gitment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: window.location.href, 
+  owner: '<%= theme.gitment.owner %>',
+  repo: '<%= theme.gitment.repo %>',
+  oauth: {
+    client_id: '<%= theme.gitment.oauth.client_id %>',
+    client_secret: '<%= theme.gitment.oauth.client_secret %>',
+  },
+})
+gitment.render('gitment-container')
+</script>

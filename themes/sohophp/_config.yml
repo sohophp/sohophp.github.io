@@ -64,3 +64,12 @@ valine:
   lang: zh-cn # i18n: zh-cn/en
   placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
   guest_info: nick,mail,link #valine comment header info
+  
+gitment:
+  enable: true
+  owner: sohophp
+  repo: sohophp.github.io
+  oauth:
+    client_id: f9142dad27f47b7262a7
+    client_secret: 5317719f7eae470e690de0141f05f97069d0375d
+
