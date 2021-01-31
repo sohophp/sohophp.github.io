@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.sohophp.app</id>
+    <title>SOHOPHP • Posts by &#34;centos&#34; tag</title>
+    <link href="https://www.sohophp.app" />
+    <updated>2021-01-31T01:14:10.000Z</updated>
+    <category term="Linux" />
+    <category term="Centos" />
+    <category term="Visual Sudio Code" />
+    <category term="PHP" />
+    <category term="Hexo" />
+    <category term="Markdown" />
+    <category term="Image" />
+    <category term="Javascript" />
+    <entry>
+        <id>https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/</id>
+        <title>Linux 常用命令备用</title>
+        <link rel="alternate" href="https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/"/>
+        <content type="html">&lt;h2 id=&#34;netstat&#34;&gt;&lt;a href=&#34;#netstat&#34; class=&#34;headerlink&#34; title=&#34;netstat&#34;&gt;&lt;/a&gt;netstat&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;netstat -nltp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看当前监听端口，例如在安装了apache(httpd)和mod_ssl后，测试https不可用。&lt;br&gt;使用netstat -nltp 查看有apache在监听80,但没有443.(重新安装mod_ssl后正常).&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;持续更新….&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</content>
+        <category term="Linux" />
+        <category term="Centos" />
+        <updated>2021-01-31T01:14:10.000Z</updated>
+    </entry>
+</feed>

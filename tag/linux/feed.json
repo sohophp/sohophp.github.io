@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "SOHOPHP • All posts by \"linux\" tag",
+    "description": "",
+    "home_page_url": "https://www.sohophp.app",
+    "items": [
+        {
+            "id": "https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/",
+            "url": "https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/",
+            "title": "Linux 常用命令备用",
+            "date_published": "2021-01-31T01:14:10.000Z",
+            "content_html": "<h2 id=\"netstat\"><a href=\"#netstat\" class=\"headerlink\" title=\"netstat\"></a>netstat</h2><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">netstat -nltp</span><br></pre></td></tr></table></figure>\n<p>查看当前监听端口，例如在安装了apache(httpd)和mod_ssl后，测试https不可用。<br>使用netstat -nltp 查看有apache在监听80,但没有443.(重新安装mod_ssl后正常).</p>\n<hr>\n<p><strong><em>持续更新….</em></strong></p>\n",
+            "tags": [
+                "Linux",
+                "Centos"
+            ]
+        }
+    ]
+}
