@@ -5,16 +5,95 @@
         <link>https://www.sohophp.app</link>
         <description></description>
         <language>en</language>
-        <pubDate>Sun, 31 Jan 2021 01:14:10 +0000</pubDate>
-        <lastBuildDate>Sun, 31 Jan 2021 01:14:10 +0000</lastBuildDate>
+        <pubDate>Tue, 02 Feb 2021 11:52:06 +0000</pubDate>
+        <lastBuildDate>Tue, 02 Feb 2021 11:52:06 +0000</lastBuildDate>
+        <category>Composer</category>
+        <category>PHP</category>
+        <category>CRM</category>
+        <category>CentOS</category>
+        <category>CentOS7</category>
+        <category>Apache</category>
+        <category>Httpd</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
         <category>Linux</category>
         <category>Centos</category>
+        <category>ModSecurity</category>
+        <category>CRS</category>
         <category>Visual Sudio Code</category>
-        <category>PHP</category>
         <category>Hexo</category>
         <category>Markdown</category>
         <category>Image</category>
         <category>Javascript</category>
+        <item>
+            <guid isPermalink="true">https://www.sohophp.app/2021/02/02/ModSecurity/</guid>
+            <title>ModSecurity</title>
+            <link>https://www.sohophp.app/2021/02/02/ModSecurity/</link>
+            <category>CentOS</category>
+            <category>Apache</category>
+            <category>Httpd</category>
+            <category>Linux</category>
+            <category>ModSecurity</category>
+            <category>CRS</category>
+            <pubDate>Tue, 02 Feb 2021 11:52:06 +0000</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;安装-ModSecurity&#34;&gt;&lt;a href=&#34;#安装-ModSecurity&#34; class=&#34;headerlink&#34; title=&#34;安装 ModSecurity&#34;&gt;&lt;/a&gt;安装 ModSecurity&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.modsecurity.org/&#34;&gt;https://www.modsecurity.org/&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 安装mod_security&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ yum install mod_security&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 重启httpd&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo systemctl restart httpd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;安装-CRS-CoreRuleSet-规则集&#34;&gt;&lt;a href=&#34;#安装-CRS-CoreRuleSet-规则集&#34; class=&#34;headerlink&#34; title=&#34;安装 CRS (CoreRuleSet) 规则集&#34;&gt;&lt;/a&gt;安装 CRS (CoreRuleSet) 规则集&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://coreruleset.org/installation/&#34;&gt;https://coreruleset.org/installation/&lt;/a&gt;  &lt;/p&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 以下以root运行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ su&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 安装 wget&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo yum install wget &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 进入/etc/httpd下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /etc/httpd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 下载CRS最新版&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ wget https://github.com/coreruleset/coreruleset/archive/v3.3.0.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 解压缩&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ tar -zxvf v3.3.0.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 创建动态链接&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ ln -s coreruleset-3.3.0 /etc/httpd/crs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 复制配置文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ cp crs/crs-setup.conf.example crs/crs-setup.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 修改conf&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo vim /etc/httpd/conf.d/mod_security.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 加两行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt; IncludeOptional crs/crs-setup.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt; IncludeOptional crs/rules/*.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 检查 httpd配置是否有错&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ apachectl configtest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 重启 httpd&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ systemctl restart httpd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 触发警报以进行测试&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ curl -I http://localhost?&lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt;=/bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt; HTTP/1.1 403 Forbidden&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 测试 PUT&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;curl -X PUT -I http://localhost&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt; HTTP/1.1 403 Forbidden&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;开放PUT-DELETE-方法&#34;&gt;&lt;a href=&#34;#开放PUT-DELETE-方法&#34; class=&#34;headerlink&#34; title=&#34;开放PUT,DELETE 方法&#34;&gt;&lt;/a&gt;开放PUT,DELETE 方法&lt;/h2&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /etc/httpd/crs/rules&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ cp REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 从 REQUEST-901-INITIALIZATION.conf 中复制一段修改加到REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf 下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# id 要修改为唯一，在tx.allowed_methods里加PUT DELETE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;SecRule &amp;amp;TX:allowed_methods &lt;span class=&#34;string&#34;&gt;&amp;quot;@eq 0&amp;quot;&lt;/span&gt; \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;string&#34;&gt;&amp;quot;id:9011601,\&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;    phase:1,\&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;    pass,\&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;    nolog,\&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;    ver:&amp;#x27;OWASP_CRS/3.3.0&amp;#x27;,\&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;    setvar:&amp;#x27;tx.allowed_methods=GET PUT DELETE HEAD POST OPTIONS&amp;#x27;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ apachectl configtest&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ systemctl restart httpd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ curl -X PUT -I http://localhost&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt; HTTP/1.1 200 OK&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&#34;ModSecurity的功能：&#34;&gt;&lt;a href=&#34;#ModSecurity的功能：&#34; class=&#34;headerlink&#34; title=&#34;ModSecurity的功能：&#34;&gt;&lt;/a&gt;ModSecurity的功能：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;SQL Injection (SQLi)：阻止SQL注入&lt;/p&gt;
+&lt;p&gt;程式寫出的漏洞。 編碼 “ 和 ‘ 可以解決&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Cross Site Scripting (XSS)：阻止跨站脚本攻击&lt;/p&gt;
+&lt;p&gt;跨站請求。對程式沒影響，如果有表單使用 CSRF 驗證碼 ，每個表單在打開網址是生成一個用這個網址生成的字串。然後在表單裏用input type=hidden value=驗證碼。 提交後先驗證這個是否正確。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;p&gt;Local File Inclusion (LFI)：阻止利用本地文件包含漏洞进行攻击&lt;/p&gt;
+&lt;p&gt;程式寫出的漏洞， 在使用include,require,include_once,require_once時注意一下變量不是用戶提交的。 &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Remote File Inclusione(RFI)：阻止利用远程文件包含漏洞进行攻击&lt;/p&gt;
+&lt;p&gt;程式寫出的漏洞，在使用讀文件時。不要執行讀文件內代碼。例如 include,file_get_contets 遠程文件時。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Remote Code Execution (RCE)：阻止利用远程命令执行漏洞进行攻击&lt;/p&gt;
+&lt;p&gt; 同樣不執行遠程問題，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;PHP Code Injectiod：阻止PHP代码注入&lt;/p&gt;
+&lt;p&gt;主機沒有寫權限就不能執行PHP代碼&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTTP Protocol Violations：阻止违反HTTP协议的恶意访问&lt;/p&gt;
+&lt;p&gt;使用HTTPS(SSL)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTTPoxy：阻止利用远程代理感染漏洞进行攻击&lt;/p&gt;
+&lt;p&gt;主機不使用代理&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Shellshock：阻止利用Shellshock漏洞进行攻击&lt;/p&gt;
+&lt;p&gt; 限制使用以下function:&lt;br&gt; escapeshellarg — 把字符串转码为可以在 shell 命令里使用的参数&lt;br&gt; escapeshellcmd — shell 元字符转义&lt;br&gt; exec — 执行一个外部程序&lt;br&gt; passthru — 执行外部程序并且显示原始输出&lt;br&gt; proc_close — 关闭由 proc_open 打开的进程并且返回进程退出码&lt;br&gt; proc_get_status — 获取由 proc_open 函数打开的进程的信息&lt;br&gt; proc_nice — 修改当前进程的优先级&lt;br&gt; proc_open — 执行一个命令，并且打开用来输入/输出的文件指针。&lt;br&gt; proc_terminate — 杀除由 proc_open 打开的进程&lt;br&gt; shell_exec — 通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回。&lt;br&gt; system — 执行外部程序，并且显示输出&lt;/p&gt;
+&lt;p&gt; 如果有程式使用到的要打開，如果apache用戶沒有權限。即使能執行也不能做什麼，現在我們就是這樣。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Session Fixation：阻止利用Session会话ID不变的漏洞进行攻击&lt;/p&gt;
+&lt;p&gt;curl 帶 cookie，連續執行帶有會話的請求。 首先要得到SessionID,已經得到了后邊隨便執行什麼了。 &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Scanner Detection：阻止黑客扫描网站&lt;/p&gt;
+&lt;p&gt;掃描的主要是網上下載的開源程式。我們沒有。然後是主機端口不關程式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Metadata/Error Leakages：阻止源代码/错误信息泄露&lt;/p&gt;
+&lt;p&gt;PHP7 很少。 再有就是程式自己寫出來的錯誤。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Project Honey Pot Blacklist：蜜罐项目黑名单&lt;br&gt; 不知道是啥。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GeoIP Country Blocking：根据判断IP地址归属地来进行IP阻断&lt;/p&gt;
+&lt;p&gt;限IP  ，我很討厭限制IP, 說明自己有漏洞。只限部分人。 沒見過哪個黑客用自己IP的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/</guid>
             <title>Linux 常用命令备用</title>

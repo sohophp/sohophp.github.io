@@ -7,10 +7,23 @@
         <language>en</language>
         <pubDate>Fri, 29 Jan 2021 16:46:32 +0000</pubDate>
         <lastBuildDate>Fri, 29 Jan 2021 16:46:32 +0000</lastBuildDate>
+        <category>Composer</category>
+        <category>PHP</category>
+        <category>CRM</category>
+        <category>CentOS</category>
+        <category>CentOS7</category>
+        <category>Apache</category>
+        <category>Httpd</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
         <category>Linux</category>
         <category>Centos</category>
+        <category>ModSecurity</category>
+        <category>CRS</category>
         <category>Visual Sudio Code</category>
-        <category>PHP</category>
         <category>Hexo</category>
         <category>Markdown</category>
         <category>Image</category>
@@ -19,13 +32,14 @@
             <guid isPermalink="true">https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/</guid>
             <title>Visual Studio Code PHP需要的插件</title>
             <link>https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/</link>
-            <category>Visual Sudio Code</category>
             <category>PHP</category>
+            <category>Visual Sudio Code</category>
             <pubDate>Fri, 29 Jan 2021 16:46:32 +0000</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;Markdown-Preview-Enhanced&#34;&gt;&lt;a href=&#34;#Markdown-Preview-Enhanced&#34; class=&#34;headerlink&#34; title=&#34;Markdown Preview Enhanced&#34;&gt;&lt;/a&gt;Markdown Preview Enhanced&lt;/h2&gt;&lt;h3 id=&#34;引用介绍&#34;&gt;&lt;a href=&#34;#引用介绍&#34; class=&#34;headerlink&#34; title=&#34;引用介绍:&#34;&gt;&lt;/a&gt;引用介绍:&lt;/h3&gt;&lt;p&gt;Markdown Preview Enhanced 是一款为 Atom 以及 Visual Studio Code 编辑器编写的超级强大的 Markdown 插件。 这款插件意在让你拥有飘逸的 Markdown 写作体验。 &lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/1908863/28227953-eb6eefa4-68a1-11e7-8769-96ea83facf3b.png&#34; alt=&#34;Markdown Preview Enhanced&#34; title=&#34;Markdown Preview Enhanced 官网图片&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;插件网址&#34;&gt;&lt;a href=&#34;#插件网址&#34; class=&#34;headerlink&#34; title=&#34;插件网址&#34;&gt;&lt;/a&gt;插件网址&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/&#34;&gt;https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/&lt;/a&gt; &lt;/p&gt;
 &lt;h3 id=&#34;使用体验&#34;&gt;&lt;a href=&#34;#使用体验&#34; class=&#34;headerlink&#34; title=&#34;使用体验&#34;&gt;&lt;/a&gt;使用体验&lt;/h3&gt;&lt;p&gt;用来编辑Markdown文档时预览功能 &lt;/p&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;IntelliJ-IDEA-Keybindings&#34;&gt;&lt;a href=&#34;#IntelliJ-IDEA-Keybindings&#34; class=&#34;headerlink&#34; title=&#34;IntelliJ IDEA Keybindings&#34;&gt;&lt;/a&gt;IntelliJ IDEA Keybindings&lt;/h2&gt;&lt;h3 id=&#34;引用介绍-1&#34;&gt;&lt;a href=&#34;#引用介绍-1&#34; class=&#34;headerlink&#34; title=&#34;引用介绍&#34;&gt;&lt;/a&gt;引用介绍&lt;/h3&gt;&lt;p&gt;Port of IntelliJ IDEA key bindings for VS Code. Includes keymaps for popular JetBrains products like IntelliJ Ultimate, WebStorm, PyCharm, PHP Storm, etc.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://github.com/kasecato/vscode-intellij-idea-keybindings/raw/master/images/usage_intellij_importer.gif&#34; alt=&#34;引用 IntelliJ IDEA Keybindings 图片&#34;&gt;&lt;/p&gt;

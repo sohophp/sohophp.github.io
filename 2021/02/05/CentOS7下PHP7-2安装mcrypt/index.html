@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>CentOS7下PHP7.2安装mcrypt | SOHOPHP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="alternate" type="application/rss+xml" title="SOHOPHP" href="https://www.sohophp.app/rss.xml" />
+  <link rel="alternate" type="application/atom+xml" title="SOHOPHP" href="https://www.sohophp.app/atom.xml" />
+  <link rel="alternate" type="application/json" title="SOHOPHP" href="https://www.sohophp.app/feed.json" />
+
+  <meta name="description" content="PHP7.2 的变更,MCrypt 扩展从内核移动到 PECL。 考虑到 mcrypt 库自 2007 年以来未见任何更新，不再建议使用。 代替品即可以用 OpenSSL 也可以用Sodium 以下是Centos7.5+PHP7.2安装mcrypt过程 123456789101112131415161718192021222324# 安裝依賴$ yum install libmcrypt libm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7下PHP7.2安装mcrypt">
+<meta property="og:url" content="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/index.html">
+<meta property="og:site_name" content="SOHOPHP">
+<meta property="og:description" content="PHP7.2 的变更,MCrypt 扩展从内核移动到 PECL。 考虑到 mcrypt 库自 2007 年以来未见任何更新，不再建议使用。 代替品即可以用 OpenSSL 也可以用Sodium 以下是Centos7.5+PHP7.2安装mcrypt过程 123456789101112131415161718192021222324# 安裝依賴$ yum install libmcrypt libm">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-05T22:14:47.000Z">
+<meta property="article:modified_time" content="2021-02-06T06:58:15.869Z">
+<meta property="article:author" content="sohophp@gmail.com">
+<meta name="twitter:card" content="summary">
+  
+    
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+   
+    
+<link rel="stylesheet" href="/typeface-source-code-pro/index.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SOHOPHP</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.sohophp.app"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CentOS7下PHP7-2安装mcrypt" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" class="article-date">
+  <time class="dt-published" datetime="2021-02-05T22:14:47.000Z" itemprop="datePublished">2021-02-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      CentOS7下PHP7.2安装mcrypt
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>PHP7.2 的变更,MCrypt 扩展从内核移动到 PECL。 考虑到 mcrypt 库自 2007 年以来未见任何更新，不再建议使用。 代替品即可以用 OpenSSL 也可以用Sodium</p>
+<p>以下是Centos7.5+PHP7.2安装mcrypt过程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝依賴</span></span><br><span class="line">$ yum install libmcrypt libmcrypt-devel mcrypt mhash</span><br><span class="line"><span class="comment"># 下載擴展 http://pecl.php.net/package/mcrypt</span></span><br><span class="line">$ wget http://pecl.php.net/get/mcrypt-1.0.4.tgz</span><br><span class="line"><span class="comment"># 解壓</span></span><br><span class="line"><span class="variable">$tar</span> zxfv mcrypt-1.0.4.tgz </span><br><span class="line"><span class="comment"># 進目錄</span></span><br><span class="line">$ <span class="built_in">cd</span> mcrypt-1.0.4</span><br><span class="line"><span class="comment"># 看一下phpize在哪</span></span><br><span class="line">$ whereis phpize</span><br><span class="line"><span class="comment">#執行phpize</span></span><br><span class="line">$ /usr/bin/phpize</span><br><span class="line"><span class="comment"># 看一下php-config在哪</span></span><br><span class="line">$ whereis php-config</span><br><span class="line"><span class="comment">#編譯安裝</span></span><br><span class="line">$ ./configure --with-php-config=/usr/bin/php-config &amp;&amp; make &amp;&amp; make install</span><br><span class="line"><span class="comment"># 安裝成功會在這裏</span></span><br><span class="line">$ ls /usr/lib64/php/modules/mcrypt.so</span><br><span class="line"><span class="comment"># 在php.ini裏加一行 extension=mcrypt.so 啟用</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;extension=mcrypt.so&quot;</span> &gt;&gt; /etc/php.ini</span><br><span class="line"><span class="comment"># 查看是否安裝成功,如果成功會打印出 mcrypt</span></span><br><span class="line">$ php -m | grep mcrypt</span><br><span class="line"><span class="comment"># 重啟httpd完成</span></span><br><span class="line">$ systemctl restart httpd</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" data-id="ckktd93j90004ygt4dsho5ml2" data-title="CentOS7下PHP7.2安装mcrypt" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/Composer/">Composer</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Visual-Sudio-Code/">Visual Sudio Code</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRM/" rel="tag">CRM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRS/" rel="tag">CRS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS7/" rel="tag">CentOS7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Httpd/" rel="tag">Httpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image/" rel="tag">Image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ModSecurity/" rel="tag">ModSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP-FPM/" rel="tag">PHP-FPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7/" rel="tag">PHP7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7-2/" rel="tag">PHP7.2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Sudio-Code/" rel="tag">Visual Sudio Code</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apache/" style="font-size: 15px;">Apache</a> <a href="/tags/CRM/" style="font-size: 10px;">CRM</a> <a href="/tags/CRS/" style="font-size: 10px;">CRS</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 10px;">CentOS7</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Httpd/" style="font-size: 15px;">Httpd</a> <a href="/tags/Image/" style="font-size: 10px;">Image</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ModSecurity/" style="font-size: 10px;">ModSecurity</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP-FPM/" style="font-size: 10px;">PHP-FPM</a> <a href="/tags/PHP7/" style="font-size: 10px;">PHP7</a> <a href="/tags/PHP7-2/" style="font-size: 10px;">PHP7.2</a> <a href="/tags/Visual-Sudio-Code/" style="font-size: 10px;">Visual Sudio Code</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/">CentOS7下PHP7.2安装mcrypt</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">CRM - Composer 源管理工具</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/02/ModSecurity/">ModSecurity</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/">Linux 常用命令备用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 sohophp@gmail.com<br>
+      Powered by  sohophp.app
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
