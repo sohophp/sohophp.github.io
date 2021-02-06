@@ -10,6 +10,15 @@
         <%- partial('post/title', {class_name: 'p-name article-title'}) %>
       </header>
     <% } %>
+
+    <!-- Table of Contents -->
+   <% if (!index && post.toc){ %>
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <%- toc(post.content) %>
+    </div>
+    <% } %>
+
     <div class="e-content article-entry" itemprop="articleBody">
       <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
@@ -53,8 +62,4 @@
   <section id="comments" class="vcomment">
 
   </section>
-<% } %>
-
-<% if(!index && post.comments && theme.gitment.enable) { %>
-  <%- partial('post/comments',{theme:theme}) %>  
 <% } %>

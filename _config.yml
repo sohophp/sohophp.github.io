@@ -105,3 +105,6 @@ theme: sohophp
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+  
+toc:
+  maxDepth: 3

@@ -2,7 +2,7 @@
 title: Visual Studio Code PHP需要的插件
 date: 2021-01-29 16:46:32
 tags: [Visual Sudio Code,PHP]
-categories: [PHP,Visual Sudio Code] 
+categories: [Visual Sudio Code] 
 ---
 
 
@@ -26,6 +26,7 @@ https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/
 
 用来编辑Markdown文档时预览功能 
 
+<!--more-->
 ---
 
 ## IntelliJ IDEA Keybindings
