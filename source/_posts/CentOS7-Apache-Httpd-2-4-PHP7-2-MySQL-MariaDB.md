@@ -6,6 +6,7 @@ categories: [Linux,CentOS]
 toc: true
 --- 
 
+
 ## 安装CentOS7
 
 ### 设定IP,HostName
