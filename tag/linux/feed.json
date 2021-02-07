@@ -5,6 +5,19 @@
     "home_page_url": "https://www.sohophp.app",
     "items": [
         {
+            "id": "https://www.sohophp.app/2021/02/07/SELinux/",
+            "url": "https://www.sohophp.app/2021/02/07/SELinux/",
+            "title": "SELinux",
+            "date_published": "2021-02-07T15:02:00.000Z",
+            "content_html": "<h3 id=\"SELinux的策略与规则管理相关命令\"><a href=\"#SELinux的策略与规则管理相关命令\" class=\"headerlink\" title=\"SELinux的策略与规则管理相关命令\"></a>SELinux的策略与规则管理相关命令</h3><h4 id=\"getsebool\"><a href=\"#getsebool\" class=\"headerlink\" title=\"getsebool\"></a>getsebool</h4><p>getsebool命令是用来查询SELinux策略内各项规则的布尔值。<br>SELinux的策略与规则管理相关命令：<br>seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>\n<h5 id=\"选项\"><a href=\"#选项\" class=\"headerlink\" title=\"选项\"></a>选项</h5><p>-a：列出目前系统上面的所有布尔值条款设置为开启或关闭值。</p>\n<h5 id=\"实例\"><a href=\"#实例\" class=\"headerlink\" title=\"实例\"></a>实例</h5><figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br></pre></td><td class=\"code\"><pre><span class=\"line\"><span class=\"comment\"># 查看httpd相关设定</span></span><br><span class=\"line\">$ getsebool -a | grep httpd</span><br><span class=\"line\"></span><br></pre></td></tr></table></figure>\n",
+            "tags": [
+                "CentOS",
+                "CentOS7",
+                "Linux",
+                "SELinux"
+            ]
+        },
+        {
             "id": "https://www.sohophp.app/2021/02/02/ModSecurity/",
             "url": "https://www.sohophp.app/2021/02/02/ModSecurity/",
             "title": "ModSecurity",

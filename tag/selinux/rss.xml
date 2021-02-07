@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SOHOPHP • Posts by &#34;selinux&#34; tag</title>
+        <link>https://www.sohophp.app</link>
+        <description></description>
+        <language>en</language>
+        <pubDate>Sun, 07 Feb 2021 15:02:00 +0000</pubDate>
+        <lastBuildDate>Sun, 07 Feb 2021 15:02:00 +0000</lastBuildDate>
+        <category>Composer</category>
+        <category>PHP</category>
+        <category>CRM</category>
+        <category>CentOS</category>
+        <category>CentOS7</category>
+        <category>Apache</category>
+        <category>Httpd</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
+        <category>SSL</category>
+        <category>Https</category>
+        <category>Linux</category>
+        <category>Centos</category>
+        <category>ModSecurity</category>
+        <category>CRS</category>
+        <category>SELinux</category>
+        <category>Visual Sudio Code</category>
+        <category>Hexo</category>
+        <category>Markdown</category>
+        <category>Image</category>
+        <category>Javascript</category>
+        <item>
+            <guid isPermalink="true">https://www.sohophp.app/2021/02/07/SELinux/</guid>
+            <title>SELinux</title>
+            <link>https://www.sohophp.app/2021/02/07/SELinux/</link>
+            <category>CentOS</category>
+            <category>CentOS7</category>
+            <category>Linux</category>
+            <category>SELinux</category>
+            <pubDate>Sun, 07 Feb 2021 15:02:00 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;SELinux的策略与规则管理相关命令&#34;&gt;&lt;a href=&#34;#SELinux的策略与规则管理相关命令&#34; class=&#34;headerlink&#34; title=&#34;SELinux的策略与规则管理相关命令&#34;&gt;&lt;/a&gt;SELinux的策略与规则管理相关命令&lt;/h3&gt;&lt;h4 id=&#34;getsebool&#34;&gt;&lt;a href=&#34;#getsebool&#34; class=&#34;headerlink&#34; title=&#34;getsebool&#34;&gt;&lt;/a&gt;getsebool&lt;/h4&gt;&lt;p&gt;getsebool命令是用来查询SELinux策略内各项规则的布尔值。&lt;br&gt;SELinux的策略与规则管理相关命令：&lt;br&gt;seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。&lt;/p&gt;
+&lt;h5 id=&#34;选项&#34;&gt;&lt;a href=&#34;#选项&#34; class=&#34;headerlink&#34; title=&#34;选项&#34;&gt;&lt;/a&gt;选项&lt;/h5&gt;&lt;p&gt;-a：列出目前系统上面的所有布尔值条款设置为开启或关闭值。&lt;/p&gt;
+&lt;h5 id=&#34;实例&#34;&gt;&lt;a href=&#34;#实例&#34; class=&#34;headerlink&#34; title=&#34;实例&#34;&gt;&lt;/a&gt;实例&lt;/h5&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看httpd相关设定&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ getsebool -a | grep httpd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
