@@ -193,7 +193,13 @@ $ sudo systemctl start httpd
 
 ```
 
-安装net命令行工具。
+查看netstat命令属于哪个包
+
+```Bash
+$ yum whatprovides netstat
+```
+
+安装net-tools
 ```Bash
 $ sudo yum install net-tools -y
 ```
@@ -323,6 +329,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 MariaDB [(none)]> quit;
 
 ```
+---
 
 ## 安装PHP 7.2 
 
@@ -373,6 +380,7 @@ Content-Type: text/html; charset=UTF-8
 
 
 [CentOS7下PHP7.2安装mcrypt](CentOS7下PHP7-2安装mcrypt.md)
+
 
 
 ### php-fpm
@@ -502,6 +510,8 @@ Transfer-Encoding: chunked
 Content-Type: text/html; charset=UTF-8
 ```
 
+---
+
 安装Git
 
 ```Bash
@@ -509,7 +519,7 @@ Content-Type: text/html; charset=UTF-8
 $ sudo yum install git -y
 # 查看 Git版本
 $ git --version
-git version 1.8.3.1
+> git version 1.8.3.1
 ```
 
 安装Composer
@@ -520,8 +530,149 @@ $ php ~/composer-setup.php
 $ sudo mv ~/composer.phar /usr/bin/composer
 $ sudo chmod +x /usr/bin/composer
 $ composer --version
-Composer version 2.0.9 2021-01-27 16:09:27
+> Composer version 2.0.9 2021-01-27 16:09:27
 ```
-## 安装ModSecurity
- [安装 ModSecurity](ModSecurity.md)
- [安装 CRS 规则集](ModSecurity.md)
+
+---
+
+##  安装 ModSecurity
+
+https://www.modsecurity.org/
+
+```Bash
+# 安装mod_security
+$ yum install mod_security
+# 
+# 重启httpd
+$ sudo systemctl restart httpd
+```
+##  安装 CRS (CoreRuleSet) 规则集
+
+https://coreruleset.org/installation/  
+
+
+<!--more-->
+```Bash
+
+# 以下以root运行
+$ su
+# 安装 wget
+$ sudo yum install wget 
+# 进入/etc/httpd下
+$ cd /etc/httpd
+# 下载CRS最新版
+$ wget https://github.com/coreruleset/coreruleset/archive/v3.3.0.tar.gz
+# 解压缩
+$ tar -zxvf v3.3.0.tar.gz
+# 创建动态链接
+$ ln -s coreruleset-3.3.0 /etc/httpd/crs
+# 复制配置文件
+$ cp crs/crs-setup.conf.example crs/crs-setup.conf
+# 修改conf
+$ sudo vim /etc/httpd/conf.d/mod_security.conf
+# 加两行
+> IncludeOptional crs/crs-setup.conf
+> IncludeOptional crs/rules/*.conf
+# 检查 httpd配置是否有错
+$ apachectl configtest
+# 重启 httpd
+$ systemctl restart httpd
+# 触发警报以进行测试
+$ curl -I http://localhost?exec=/bin/bash
+> HTTP/1.1 403 Forbidden
+# 测试 PUT
+curl -X PUT -I http://localhost
+> HTTP/1.1 403 Forbidden
+
+```
+## 开放PUT,DELETE 方法
+
+```Bash
+$ cd /etc/httpd/crs/rules
+$ cp REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+# 从 REQUEST-901-INITIALIZATION.conf 中复制一段修改加到REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf 下
+# id 要修改为唯一，在tx.allowed_methods里加PUT DELETE
+SecRule &TX:allowed_methods "@eq 0" \
+    "id:9011601,\
+    phase:1,\
+    pass,\
+    nolog,\
+    ver:'OWASP_CRS/3.3.0',\
+    setvar:'tx.allowed_methods=GET PUT DELETE HEAD POST OPTIONS'"
+$ apachectl configtest
+$ systemctl restart httpd
+$ curl -X PUT -I http://localhost
+> HTTP/1.1 200 OK
+```
+
+## 其它
+查看SElinux策略内httpd相关规则的布尔值
+原则是先按默认,在需要时打开相关设定
+
+```Bash
+$ getsebool -a | grep httpd
+httpd_anon_write --> off     匿名写关闭
+httpd_builtin_scripting --> on
+httpd_can_check_spam --> off
+httpd_can_connect_ftp --> off     PHP连接ftp如果需要才打开
+httpd_can_connect_ldap --> off
+httpd_can_connect_mythtv --> off
+httpd_can_connect_zabbix --> off
+httpd_can_network_connect --> off      需要时打开
+httpd_can_network_connect_cobbler --> off
+httpd_can_network_connect_db --> off  连接外网数据库,如果需要才打开
+httpd_can_network_memcache --> off    连接外网memcache
+httpd_can_network_relay --> off
+httpd_can_sendmail --> off          mail发信,要打开
+httpd_dbus_avahi --> off 
+httpd_dbus_sssd --> off
+httpd_dontaudit_search_dirs --> off
+httpd_enable_cgi --> on               PHP-FPM 是fast-cgi 要打开
+httpd_enable_ftp_server --> off           
+httpd_enable_homedirs --> off
+httpd_execmem --> off
+httpd_graceful_shutdown --> on
+httpd_manage_ipa --> off
+httpd_mod_auth_ntlm_winbind --> off
+httpd_mod_auth_pam --> off
+httpd_read_user_content --> off
+httpd_run_ipa --> off
+httpd_run_preupgrade --> off
+httpd_run_stickshift --> off
+httpd_serve_cobbler_files --> off
+httpd_setrlimit --> off
+httpd_ssi_exec --> off
+httpd_sys_script_anon_write --> off
+httpd_tmp_exec --> off
+httpd_tty_comm --> off
+httpd_unified --> off
+httpd_use_cifs --> off
+httpd_use_fusefs --> off
+httpd_use_gpg --> off
+httpd_use_nfs --> off
+httpd_use_openstack --> off
+httpd_use_sasl --> off
+httpd_verify_dns --> off
+```
+
+
+-bash: mail: command not found
+
+```Bash
+# 安装 sendmail mailx
+$ sudo yum install sendmail mailx jwhois 
+$ sudo systemctl enable sendmail
+$ sudo systemctl start sendmail
+# SELinux 开放httpd发信
+$ sudo setsebool -P httpd_can_sendmail=1
+
+```
+SELinux 对指定目录开放写权限,或者web根目录全开
+
+ ```Bash
+ # 对指定目录开放写权限,或者web根目录全开
+ $ sudo chcon -R -t httpd_sys_rw_content_t ./uploads
+ ```
+
+
+
