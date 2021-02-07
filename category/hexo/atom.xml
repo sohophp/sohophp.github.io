@@ -16,6 +16,8 @@
     <category term="MySQL" />
     <category term="MariaDB" />
     <category term="PHP-FPM" />
+    <category term="SSL" />
+    <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />

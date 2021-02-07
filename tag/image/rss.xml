@@ -19,6 +19,8 @@
         <category>MySQL</category>
         <category>MariaDB</category>
         <category>PHP-FPM</category>
+        <category>SSL</category>
+        <category>Https</category>
         <category>Linux</category>
         <category>Centos</category>
         <category>ModSecurity</category>
