@@ -408,8 +408,28 @@ $ sudo netstat -nltp | grep 9000
 tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN      23148/php-fpm: mast 
 
 ```
+所有.php使用php-fpm
 
- ### 创建VirtualHost，使用自定域名/主机名，使用php-fpm,开启rewrite,.htaccess
+```Bash
+
+$ sudo vim /etc/httpd/conf.d/php-fpm.conf
+
+> <FilesMatch \.php$>
+>    SetHandler "proxy:fcgi://127.0.0.1:9000"
+> </FilesMatch>
+```
+重启apache测试
+```Bash
+# 配置是否有錯
+$ apachectl configtest
+# 重启apache
+$ sudo systemctl restart httpd
+# 测试php-fpm
+$ curl http://localhost/index.php | grep php-fpm
+
+```
+
+ ### 创建VirtualHost，使用自定域名/主机名，开启rewrite,.htaccess
 
 修改/etc/hosts加入自定域名
 ```Bash 
@@ -432,10 +452,7 @@ $ sudo vim /etc/httpd/conf.d/vhosts.conf
 <VirtualHost *:80>
   DocumentRoot "/var/www/html"
   ServerName localhost
-  ServerAlias php72.vm
-# ProxyRequests Off
-  ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/$1
-
+  ServerAlias php72.vm 
 </VirtualHost>
 ```
 修改httpd.conf开启.htaccess
