@@ -9,9 +9,7 @@ toc: true
 
 ## 安装CentOS7
 
-### 设定IP,HostName
-   
-   修改主机名
+### 修改主机名 
 
 ```Bash
 $ hostnamectl set-hostname "主机名"
@@ -20,51 +18,54 @@ $ cat /etc/hostname
 ```
 
 
-设定IP
-nmtui 设定工具菜单,ssh client(Xshell,putty等)连接后设定connection就不能save了。
-
-```Bash 
-$ nmtui   
-```
-
- ![](CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/20210205165530.png)
+### 配置网络 
  
- 查看网卡
-
-
+ 查看网卡 
  ```Bash 
    ip addr 
  ```
  <!--more-->
 ---
+修改网络配置
 
- 进入/etc/sysconfig/network-scripts/编辑ifcfg-eth0
 
 ```Bash
 $ cd /etc/sysconfig/network-scripts/
 $ ll
 total 232
 -rw-r--r--. 1 root root   348 Feb  5 03:49 ifcfg-eth0
--rw-r--r--. 1 root root   254 Aug 19  2019 ifcfg-lo
-...
-$ vi ifcfg-eth0
-```
-![](CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/20210205170217.png)
+-rw-r--r--. 1 root root   254 Aug 19  2019 ifcfg-lo  
+$ sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0
 
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=eth0
+UUID=0296b603-2823-40a5-9f39-7743e87b527a
+DEVICE=eth0
+ONBOOT=yes
+IPADDR=192.168.3.105
+PREFIX=24
+GATEWAY=192.168.3.1
+DNS1=192.168.3.1 
 
-如果不是使用root编辑会没有写权限 read only , 在vi中 ESC 输入 :w !sudo tee %
-
-
-重启网卡
-
-```Bash
-$ ifup eth0
-
+# 如果不是使用root编辑会没有写权限 read only , 
+# 在vi中 ESC 输入 :w !sudo tee % 
+# 重启网卡
+$ ifup eth0 
 ```
 
 换Xshell连ssh截图和复制方便
 
-修改时区
+### 修改时区
 
 ```Bash
 # 删除原来的时区文件
@@ -78,7 +79,8 @@ $ sudo vim /etc/sysconfig/clock
 
 ```
 
-安装 ntp
+### 安装 ntp 校验时间
+
 ```Bash
 # 安装 ntp,ntpdate
 $ sudo yum install ntp ntpdate
@@ -114,6 +116,7 @@ $ date -R
  
 
 安装 strace
+
 在Linux系统中，strace命令是一个集诊断、调试、统计与一体的工具，可用来追踪调试程序，能够与其他命令搭配使用
 
 ```Bash
@@ -149,6 +152,7 @@ firewalld.service - firewalld - dynamic firewall daemon
            └─719 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid
 
 ```
+
 查看firewalld开放端口（--list-ports）和 服务(--list-services)
 
 ```Bash
@@ -168,15 +172,16 @@ public (active)
   icmp-blocks: 
   rich rules: 
 ``` 
+
 更新系统
 
 ```Bash
 $ sudo yum update
-
 ```
 
 
 ## 安装Apache(Httpd)
+
 
 ```Bash
 $ sudo yum install httpd  
@@ -250,11 +255,13 @@ drwxr-xr-x. 2 root  root   6 Nov 16 11:19 cgi-bin
 drwxr-xr-x. 2 jason jason 24 Feb  5 07:25 html
 ```
 安装VIM
+
 ```Bash
 $ sudo yum install vim -y
 ```
 
 新建并编辑测试网页
+
 ```Bash
 $ vim /var/www/html/index.html
 ```
@@ -278,7 +285,7 @@ $ curl http://localhost
 ---
 
 
-## 安装 MariaDB (CentOS7默认用MariaDB而不是MySQL)
+## 安装 MariaDB (MySQL)
 
 ```Bash
 $ sudo yum install mariadb mariadb-server
@@ -334,6 +341,7 @@ MariaDB [(none)]> quit;
 ## 安装PHP 7.2 
 
 查看YUM安装PHP版本
+
 ```Bash
 $ sudo yum info php
 ```
@@ -381,8 +389,6 @@ Content-Type: text/html; charset=UTF-8
 
 [CentOS7下PHP7.2安装mcrypt](CentOS7下PHP7-2安装mcrypt.md)
 
-
-
 ### php-fpm
 
 https://cwiki.apache.org/confluence/display/HTTPD/PHP-FPM
@@ -416,7 +422,7 @@ $ sudo netstat -nltp | grep 9000
 tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN      23148/php-fpm: mast 
 
 ```
-所有.php使用php-fpm
+所有.php使用php-fpm代理
 
 ```Bash
 
@@ -537,6 +543,7 @@ $ composer --version
 
 ##  安装 ModSecurity
 
+### 安装 ModSecurity
 https://www.modsecurity.org/
 
 ```Bash
@@ -546,7 +553,7 @@ $ yum install mod_security
 # 重启httpd
 $ sudo systemctl restart httpd
 ```
-##  安装 CRS (CoreRuleSet) 规则集
+###  安装 CRS (CoreRuleSet) 规则集
 
 https://coreruleset.org/installation/  
 
@@ -585,7 +592,7 @@ curl -X PUT -I http://localhost
 > HTTP/1.1 403 Forbidden
 
 ```
-## 开放PUT,DELETE 方法
+### 开放PUT,DELETE 方法
 
 ```Bash
 $ cd /etc/httpd/crs/rules
@@ -606,6 +613,16 @@ $ curl -X PUT -I http://localhost
 ```
 
 ## 其它
+
+### SELinux
+
+#### SELinux 对指定目录开放写权限,或者web根目录全开
+
+ ```Bash
+ # 对指定目录开放写权限,或者web根目录全开
+ $ sudo chcon -R -t httpd_sys_rw_content_t ./uploads
+ ```
+
 查看SElinux策略内httpd相关规则的布尔值
 原则是先按默认,在需要时打开相关设定
 
@@ -618,7 +635,7 @@ httpd_can_connect_ftp --> off     PHP连接ftp如果需要才打开
 httpd_can_connect_ldap --> off
 httpd_can_connect_mythtv --> off
 httpd_can_connect_zabbix --> off
-httpd_can_network_connect --> off      需要时打开
+httpd_can_network_connect --> off    需要时打开,网络资源的访问如redis,读写网络资源
 httpd_can_network_connect_cobbler --> off
 httpd_can_network_connect_db --> off  连接外网数据库,如果需要才打开
 httpd_can_network_memcache --> off    连接外网memcache
@@ -655,8 +672,10 @@ httpd_use_sasl --> off
 httpd_verify_dns --> off
 ```
 
+### Sendmail
 
--bash: mail: command not found
+
+#### mail: command not found
 
 ```Bash
 # 安装 sendmail mailx
@@ -664,15 +683,17 @@ $ sudo yum install sendmail mailx jwhois
 $ sudo systemctl enable sendmail
 $ sudo systemctl start sendmail
 # SELinux 开放httpd发信
-$ sudo setsebool -P httpd_can_sendmail=1
+$ sudo setsebool -P httpd_can_sendmail 1
 
 ```
-SELinux 对指定目录开放写权限,或者web根目录全开
-
- ```Bash
- # 对指定目录开放写权限,或者web根目录全开
- $ sudo chcon -R -t httpd_sys_rw_content_t ./uploads
- ```
 
 
+---
 
+至此,CentOS7+Apache2.4+PHP-FPM7.2+MySQL(MariaDB5.5)+ModSecurity+CRS+Firewalld+SELinux
+
+测试环境正常.
+
+持续更新...
+
+---
