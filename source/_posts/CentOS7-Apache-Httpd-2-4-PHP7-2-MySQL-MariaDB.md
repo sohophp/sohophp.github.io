@@ -642,6 +642,63 @@ $ curl -X PUT -I http://localhost
 > HTTP/1.1 200 OK
 ```
 
+### mod_evasive DDos 防火墙 for apache
+
+***最好是有硬件防火墙!***
+
+
+参考网址
+https://www.digitalocean.com/community/tutorials/how-to-protect-against-dos-and-ddos-with-mod_evasive-for-apache-on-centos-7
+
+epel for CentOS7 网址
+https://centos.pkgs.org/7/epel-x86_64/epel-release-7-13.noarch.rpm.html
+
+```Bash
+# 查看是否安装了epel 
+$ yum repolist all | grep epel
+# 如果没有下载最新版
+$ wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-13.noarch.rpm
+$ yum localinstall epel-release-7-13.noarch.rpm
+# 安装 mod_evasive
+$ yum install yum-plugin-protectbase mod_evasive
+
+```
+```Bash
+$ cat /etc/httpd/conf.d/mod_evasive.conf | grep -Ev '^$|#'
+
+LoadModule evasive20_module modules/mod_evasive24.so 
+<IfModule mod_evasive24.c>
+    DOSHashTableSize    3097
+    # 同一页每DOSPageInterval秒最大请求数，超过会把IP加入黑名单，预设 2          
+    DOSPageCount        3       
+    # 同一个网站每DOSSiteInterval秒最大请求数，超过会把IP加入黑名单  预设 50,考虑一个网页有多个css,js,图片等可以大些
+    DOSSiteCount        50       
+    DOSPageInterval     1        
+    DOSSiteInterval     1
+    # 加入黑名单秒数，预设10，可以大些        
+    DOSBlockingPeriod   180 
+    # 日志目录，要手动mkdir并修改权限 
+    # DOSLogDir           "/var/log/mod_evasive"
+    # 加黑名单时执行的命令，可以搭配firewalld封IP
+    # DOSSystemCommand
+</IfModule>
+
+```
+
+```Bash
+# 添加 IP 白名单，用于纠错或者特殊需要
+DOSWhitelist    111.111.111.111
+DOSWhitelist    222.222.222.222
+```
+
+```Bash
+# 重启apache
+$ systemctl restart httpd
+```
+
+---
+
+
 ## 其它
 
 ### SELinux
