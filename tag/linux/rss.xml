@@ -12,25 +12,25 @@
         <category>CRM</category>
         <category>CentOS</category>
         <category>CentOS7</category>
-        <category>Apache</category>
-        <category>Httpd</category>
-        <category>PHP7</category>
-        <category>PHP7.2</category>
-        <category>MySQL</category>
-        <category>MariaDB</category>
-        <category>PHP-FPM</category>
         <category>SSL</category>
+        <category>Apache</category>
         <category>Https</category>
         <category>Linux</category>
         <category>Centos</category>
         <category>ModSecurity</category>
         <category>CRS</category>
+        <category>Httpd</category>
         <category>SELinux</category>
         <category>Visual Sudio Code</category>
         <category>Hexo</category>
         <category>Markdown</category>
         <category>Image</category>
         <category>Javascript</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
         <item>
             <guid isPermalink="true">https://www.sohophp.app/2021/02/07/SELinux/</guid>
             <title>SELinux</title>
@@ -51,10 +51,10 @@
             <link>https://www.sohophp.app/2021/02/02/ModSecurity/</link>
             <category>CentOS</category>
             <category>Apache</category>
-            <category>Httpd</category>
             <category>Linux</category>
             <category>ModSecurity</category>
             <category>CRS</category>
+            <category>Httpd</category>
             <pubDate>Tue, 02 Feb 2021 11:52:06 +0000</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;安装-ModSecurity&#34;&gt;&lt;a href=&#34;#安装-ModSecurity&#34; class=&#34;headerlink&#34; title=&#34;安装 ModSecurity&#34;&gt;&lt;/a&gt;安装 ModSecurity&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.modsecurity.org/&#34;&gt;https://www.modsecurity.org/&lt;/a&gt;&lt;/p&gt;
 &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 安装mod_security&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ yum install mod_security&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 重启httpd&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo systemctl restart httpd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;

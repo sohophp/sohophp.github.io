@@ -9,25 +9,25 @@
     <category term="CRM" />
     <category term="CentOS" />
     <category term="CentOS7" />
-    <category term="Apache" />
-    <category term="Httpd" />
-    <category term="PHP7" />
-    <category term="PHP7.2" />
-    <category term="MySQL" />
-    <category term="MariaDB" />
-    <category term="PHP-FPM" />
     <category term="SSL" />
+    <category term="Apache" />
     <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />
     <category term="CRS" />
+    <category term="Httpd" />
     <category term="SELinux" />
     <category term="Visual Sudio Code" />
     <category term="Hexo" />
     <category term="Markdown" />
     <category term="Image" />
     <category term="Javascript" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
     <entry>
         <id>https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/</id>
         <title>Visual Studio Code PHP需要的插件</title>

@@ -9,25 +9,25 @@
     <category term="CRM" />
     <category term="CentOS" />
     <category term="CentOS7" />
-    <category term="Apache" />
-    <category term="Httpd" />
-    <category term="PHP7" />
-    <category term="PHP7.2" />
-    <category term="MySQL" />
-    <category term="MariaDB" />
-    <category term="PHP-FPM" />
     <category term="SSL" />
+    <category term="Apache" />
     <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />
     <category term="CRS" />
+    <category term="Httpd" />
     <category term="SELinux" />
     <category term="Visual Sudio Code" />
     <category term="Hexo" />
     <category term="Markdown" />
     <category term="Image" />
     <category term="Javascript" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
     <entry>
         <id>https://www.sohophp.app/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</id>
         <title>CRM - Composer 源管理工具</title>

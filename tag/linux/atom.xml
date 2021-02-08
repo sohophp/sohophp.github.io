@@ -9,25 +9,25 @@
     <category term="CRM" />
     <category term="CentOS" />
     <category term="CentOS7" />
-    <category term="Apache" />
-    <category term="Httpd" />
-    <category term="PHP7" />
-    <category term="PHP7.2" />
-    <category term="MySQL" />
-    <category term="MariaDB" />
-    <category term="PHP-FPM" />
     <category term="SSL" />
+    <category term="Apache" />
     <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />
     <category term="CRS" />
+    <category term="Httpd" />
     <category term="SELinux" />
     <category term="Visual Sudio Code" />
     <category term="Hexo" />
     <category term="Markdown" />
     <category term="Image" />
     <category term="Javascript" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
     <entry>
         <id>https://www.sohophp.app/2021/02/07/SELinux/</id>
         <title>SELinux</title>
@@ -102,10 +102,10 @@
 </content>
         <category term="CentOS" />
         <category term="Apache" />
-        <category term="Httpd" />
         <category term="Linux" />
         <category term="ModSecurity" />
         <category term="CRS" />
+        <category term="Httpd" />
         <updated>2021-02-02T11:52:06.000Z</updated>
     </entry>
     <entry>

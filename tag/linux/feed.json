@@ -26,10 +26,10 @@
             "tags": [
                 "CentOS",
                 "Apache",
-                "Httpd",
                 "Linux",
                 "ModSecurity",
-                "CRS"
+                "CRS",
+                "Httpd"
             ]
         },
         {
