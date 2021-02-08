@@ -336,6 +336,36 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 MariaDB [(none)]> quit;
 
 ```
+
+
+---
+
+### 改用MySQL5.6
+
+```Bash
+# 卸载mariadb
+$ yum remove mariadb mariadb-server 
+```
+
+https://dev.mysql.com/downloads/repo/yum/
+
+```Bash
+# 下载 Red Hat Enterprise Linux 7
+$ wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# 安装release
+$ yum localinstall mysql80-community-release-el7-3.noarch.rpm
+# 查看 MySQL 开启的 YUM 源
+$ yum repolist all | grep mysql
+# 关闭8 开启5.6 安装 mysql-server , 出现错误不能启动，卸载重新安装后正常
+$ yum --disablerepo=mysql80-community --enablerepo=mysql56-community install mysql-server
+$ systemctl start mysqld
+$ systemctl enable mysqld
+$ mysql -uroot -p
+# 原来mariadb的数据库都还在
+MySQL> show databases;
+
+```
+
 ---
 
 ## 安装PHP 7.2 
