@@ -1,5 +1,5 @@
 ---
-title: CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)
+title: CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6
 date: 2021-02-05 16:34:30
 tags: [CentOS,CentOS7,Apache,Httpd,PHP,PHP7,PHP7.2,MySQL,MariaDB,PHP-FPM]
 categories: [Linux,CentOS]
@@ -9,12 +9,48 @@ toc: true
 
 ## 安装CentOS7
 
+### 虛擬機 (VM: Virtual Machine) 最小安裝 CentOS7
+
+#### Hyper-V 
+
+windows10 自带
+开机自动运行保留开机前状态 
+好像不能复制
+#### VMware Workstation
+
+收费
+MacOS 下用 VMware Fusion
+可以用到Hyper-V,那不如直接Hyper-V
+可以复制 
+#### VirtualBox
+
+免费
+可以用到Hyper-V 那不如直接Hyper-V
+可以复制
+#### Windows10 SubSystem
+
+和windows10 共用端口，IP，WSL2 (实际也是基于SSH) 编辑器方便
+有各种问题，主要不能用systemctl！
+一定用到Hyper-V,那不如直接Hyper-V
+
+#### Docker
+麻烦，保证MySQL数据在宿主机不方便 
+迁移复制方便，可以直接部署上线。
+
+---
+以下是用 Hyper-V +　CentOS-7-x86_64-Minimal-2003.iso
+
+一個root密碼，一個管理員用戶（用于VSCode|PHPStorm 使用ssh|sftp直接编辑项目），
+（安装gitea加了个git用户，没有sudo权限）
+
+其它全部 auto
+
 ### 修改主机名 
 
 ```Bash
-$ hostnamectl set-hostname "主机名"
+$ hostnamectl set-hostname "php72.vm"
 $ cat /etc/hostname
-主机名
+php72.vm
 ```
 
 
@@ -27,7 +63,6 @@ $ cat /etc/hostname
  <!--more-->
 ---
 修改网络配置
-
 
 ```Bash
 $ cd /etc/sysconfig/network-scripts/
@@ -70,7 +105,7 @@ $ ifup eth0
 ```Bash
 # 删除原来的时区文件
 $ sudo rm -rf /etc/localtime
-使用上海时间 
+# 使用上海时间 
 $ sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 $ sudo vim /etc/sysconfig/clock 
 > ZONE="Asia/Shanghai"
@@ -86,7 +121,7 @@ $ sudo vim /etc/sysconfig/clock
 $ sudo yum install ntp ntpdate
 # 指定ntp服务器同步时间
 $ sudo ntpdate cn.pool.ntp.org
-# 将系统时间写入硬件时间
+# 将系统时间写入BIOS
 $ sudo hwclock --systohc
 # 查看系统时间
 $ date
@@ -94,7 +129,7 @@ $ date
 $ hwclock
 # 查看时区
 $ date -R
-# 查看ntp配置文件，有些默认服务器
+# 查看ntp配置文件，有些预设服务器
 $ cat /etc/ntp.conf
 # 设置开机启动
 $ sudo systemctl enable ntpd
@@ -279,24 +314,33 @@ $ vim /var/www/html/index.html
 ```
 测试静态页，或者浏览器打开IP网址
 ```Bash
-$ curl http://localhost
+$ curl http://ip
 ```
 
 ---
 
+## MySQL5.6
+  
 
-## 安装 MariaDB (MySQL)
+```Bash
+# CentOS7默认是mariadb,如果已经安装，卸载mariadb
+$ yum remove mariadb mariadb-server 
+```
+安装MySQL5.6要用到的YUM源网址
+https://dev.mysql.com/downloads/repo/yum/
 
 ```Bash
-$ sudo yum install mariadb mariadb-server
-```
-设定开机启动mariadb
-```Bash
-$ sudo systemctl enable mariadb 
-```
-现在启动mariadb
-```Bash
-$ sudo systemctl start mariadb
+# 下载 Red Hat Enterprise Linux 7
+$ wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# 安装release
+$ yum localinstall mysql80-community-release-el7-3.noarch.rpm
+# 查看 MySQL 开启的 YUM 源
+$ yum repolist all | grep mysql
+# 关闭8 开启5.6 安装 mysql-server 
+# 因为我安装过mariadb出现错误不能启动，卸载再次重新安装后正常
+$ yum --disablerepo=mysql80-community --enablerepo=mysql56-community install mysql-server
+$ systemctl start mysqld
+$ systemctl enable mysqld
 ```
 
 首次安装设定root密码,删除匿名用户，删除test数据表，
@@ -327,42 +371,13 @@ Reload privilege tables now? [Y/n] y
 # 登录mysql
 $ mysql -u root -p
 # 新建用户
-MariaDB [(none)]> CREATE USER '用户名'@'%' IDENTIFIED BY '密码';
+MySQL> CREATE USER '用户名'@'%' IDENTIFIED BY '密码';
 # 赋予权限
-MariaDB [(none)]> GRANT PRIVILEGES ON *.* TO '用户名'@'%';
+MySQL> GRANT PRIVILEGES ON *.* TO '用户名'@'%';
 # 使生效 
-MariaDB [(none)]> FLUSH PRIVILEGES;
+MySQL> FLUSH PRIVILEGES;
 # 退出
-MariaDB [(none)]> quit;
-
-```
-
-
----
-
-### 改用MySQL5.6
-
-```Bash
-# 卸载mariadb
-$ yum remove mariadb mariadb-server 
-```
-
-https://dev.mysql.com/downloads/repo/yum/
-
-```Bash
-# 下载 Red Hat Enterprise Linux 7
-$ wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-# 安装release
-$ yum localinstall mysql80-community-release-el7-3.noarch.rpm
-# 查看 MySQL 开启的 YUM 源
-$ yum repolist all | grep mysql
-# 关闭8 开启5.6 安装 mysql-server , 出现错误不能启动，卸载重新安装后正常
-$ yum --disablerepo=mysql80-community --enablerepo=mysql56-community install mysql-server
-$ systemctl start mysqld
-$ systemctl enable mysqld
-$ mysql -uroot -p
-# 原来mariadb的数据库都还在
-MySQL> show databases;
+MySQL> quit;
 
 ```
 
@@ -382,18 +397,16 @@ $ sudo yum install epel-release
 $ sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 # 查看PHP版本
 $ sudo yum search php | grep php72
+# 安装PHP72和用到的扩展
 $ sudo yum install php72w-cli php72w-common php72w-devel php72w-fpm php72w-gd php72w-mbstring php72w-mysqlnd php72w-pdo php72w-xml mod_php72w
+# 查看php版本
 $ php -v
 PHP 7.2.34 (cli) (built: Oct  1 2020 13:37:37) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-
+# 查看php-fpm版本
 $ php-fpm -v
 PHP 7.2.34 (fpm-fcgi) (built: Oct  1 2020 13:40:44)
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-
 ```
+
 新建并编辑php测试文件
 ```Bash
 $ rm -f /var/www/html/index.html
@@ -415,7 +428,6 @@ Server: Apache/2.4.6 (CentOS) PHP/7.2.34
 X-Powered-By: PHP/7.2.34
 Content-Type: text/html; charset=UTF-8
 ```
-
 
 [CentOS7下PHP7.2安装mcrypt](CentOS7下PHP7-2安装mcrypt.md)
 
@@ -527,11 +539,6 @@ $ curl http://php72.vm | grep php-fpm
 ```Bash
 $ curl -X PUT -I  http://localhost
 HTTP/1.1 200 OK
-Date: Fri, 05 Feb 2021 15:22:02 GMT
-Server: Apache/2.4.6 (CentOS) PHP/7.2.34
-X-Powered-By: PHP/7.2.34
-Transfer-Encoding: chunked
-Content-Type: text/html; charset=UTF-8
 ```
 
 测试 DELETE METHOD
@@ -539,11 +546,6 @@ Content-Type: text/html; charset=UTF-8
 ```Bash
 $ curl -X DELETE -I  http://localhost
 HTTP/1.1 200 OK
-Date: Fri, 05 Feb 2021 15:22:12 GMT
-Server: Apache/2.4.6 (CentOS) PHP/7.2.34
-X-Powered-By: PHP/7.2.34
-Transfer-Encoding: chunked
-Content-Type: text/html; charset=UTF-8
 ```
 
 ---
@@ -732,31 +734,8 @@ httpd_dbus_avahi --> off
 httpd_dbus_sssd --> off
 httpd_dontaudit_search_dirs --> off
 httpd_enable_cgi --> on               PHP-FPM 是fast-cgi 要打开
-httpd_enable_ftp_server --> off           
-httpd_enable_homedirs --> off
-httpd_execmem --> off
-httpd_graceful_shutdown --> on
-httpd_manage_ipa --> off
-httpd_mod_auth_ntlm_winbind --> off
-httpd_mod_auth_pam --> off
-httpd_read_user_content --> off
-httpd_run_ipa --> off
-httpd_run_preupgrade --> off
-httpd_run_stickshift --> off
-httpd_serve_cobbler_files --> off
-httpd_setrlimit --> off
-httpd_ssi_exec --> off
-httpd_sys_script_anon_write --> off
-httpd_tmp_exec --> off
-httpd_tty_comm --> off
-httpd_unified --> off
-httpd_use_cifs --> off
-httpd_use_fusefs --> off
-httpd_use_gpg --> off
-httpd_use_nfs --> off
-httpd_use_openstack --> off
-httpd_use_sasl --> off
-httpd_verify_dns --> off
+httpd_graceful_shutdown --> on 
+...下边其它都是off
 ```
 
 ### Sendmail
@@ -774,11 +753,44 @@ $ sudo setsebool -P httpd_can_sendmail 1
 
 ```
 
+```Bash
+$ getsebool -a | grep -Ev off | grep httpd
+httpd_builtin_scripting --> on
+httpd_can_sendmail --> on
+httpd_enable_cgi --> on
+httpd_graceful_shutdown --> on
+
+
+$ firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0
+  sources: 
+  services: dhcpv6-client http https ssh
+  ports: 3000/tcp   (3000是因为我安装了gitea不包含在测试环境)
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+
+```
 
 ---
 
-至此,CentOS7+Apache2.4+PHP-FPM7.2+MySQL(MariaDB5.5)+ModSecurity+CRS+Firewalld+SELinux
-
+至此,
+CentOS7
++ Apache 2.4
++ PHP-FPM 7.2
++ MySQL 5.6
++ ModSecurity
++ CRS
++ mod_evasive
++ Firewalld
++ SELinux
+  
 测试环境正常.
 
 持续更新...
