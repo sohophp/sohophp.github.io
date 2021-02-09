@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="ckkwpxqgy000910oreq0zfh5c" data-title="SELinux" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="ckkxp2u1w000910ts1kjdbe8a" data-title="SELinux" class="article-share-link">Share</a>
       
       
       
@@ -161,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/" data-id="ckkwpxqgr000110orgah84zdl" data-title="CentOS7 自签名证书配置 Apache https (SSL)" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/" data-id="ckkxp2u1o000110tsdcfz2tdj" data-title="CentOS7 自签名证书配置 Apache https (SSL)" class="article-share-link">Share</a>
       
       
       
@@ -208,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" data-id="ckkwpxqgu000410or4jdx203c" data-title="CentOS7下PHP7.2安装mcrypt" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" data-id="ckkxp2u1s000410tsfu9x84q2" data-title="CentOS7下PHP7.2安装mcrypt" class="article-share-link">Share</a>
       
       
       
@@ -239,7 +239,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)</a>
+      <a class="p-name article-title" href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6</a>
     </h1>
   
 
@@ -251,7 +251,16 @@
 
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="安装CentOS7"><a href="#安装CentOS7" class="headerlink" title="安装CentOS7"></a>安装CentOS7</h2><h3 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hostnamectl set-hostname <span class="string">&quot;主机名&quot;</span></span><br><span class="line">$ cat /etc/hostname</span><br><span class="line">主机名</span><br></pre></td></tr></table></figure>
+        <h2 id="安装CentOS7"><a href="#安装CentOS7" class="headerlink" title="安装CentOS7"></a>安装CentOS7</h2><h3 id="虛擬機-VM-Virtual-Machine-最小安裝-CentOS7"><a href="#虛擬機-VM-Virtual-Machine-最小安裝-CentOS7" class="headerlink" title="虛擬機 (VM: Virtual Machine) 最小安裝 CentOS7"></a>虛擬機 (VM: Virtual Machine) 最小安裝 CentOS7</h3><h4 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper-V"></a>Hyper-V</h4><p>windows10 自带<br>开机自动运行保留开机前状态<br>好像不能复制</p>
+<h4 id="VMware-Workstation"><a href="#VMware-Workstation" class="headerlink" title="VMware Workstation"></a>VMware Workstation</h4><p>收费<br>MacOS 下用 VMware Fusion<br>可以用到Hyper-V,那不如直接Hyper-V<br>可以复制 </p>
+<h4 id="VirtualBox"><a href="#VirtualBox" class="headerlink" title="VirtualBox"></a>VirtualBox</h4><p>免费<br>可以用到Hyper-V 那不如直接Hyper-V<br>可以复制</p>
+<h4 id="Windows10-SubSystem"><a href="#Windows10-SubSystem" class="headerlink" title="Windows10 SubSystem"></a>Windows10 SubSystem</h4><p>和windows10 共用端口，IP，WSL2 (实际也是基于SSH) 编辑器方便<br>有各种问题，主要不能用systemctl！<br>一定用到Hyper-V,那不如直接Hyper-V</p>
+<h4 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h4><p>麻烦，保证MySQL数据在宿主机不方便<br>迁移复制方便，可以直接部署上线。</p>
+<hr>
+<p>以下是用 Hyper-V +　CentOS-7-x86_64-Minimal-2003.iso</p>
+<p>一個root密碼，一個管理員用戶（用于VSCode|PHPStorm 使用ssh|sftp直接编辑项目），<br>（安装gitea加了个git用户，没有sudo权限）</p>
+<p>其它全部 auto</p>
+<h3 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hostnamectl set-hostname <span class="string">&quot;php72.vm&quot;</span></span><br><span class="line">$ cat /etc/hostname</span><br><span class="line">php72.vm</span><br></pre></td></tr></table></figure>
 
 <h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p> 查看网卡<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr </span><br></pre></td></tr></table></figure><br>
         
@@ -262,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/" data-id="ckkwpxqhk002910or54yc9abp" data-title="CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/" data-id="ckkxp2u2g002910ts82go0mr7" data-title="CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6" class="article-share-link">Share</a>
       
       
       
@@ -322,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-id="ckkwpxqgl000010ora16p657h" data-title="CRM - Composer 源管理工具" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-id="ckkxp2u1j000010ts7xbt8044" data-title="CRM - Composer 源管理工具" class="article-share-link">Share</a>
       
       
       
@@ -378,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/02/ModSecurity/" data-id="ckkwpxqgw000610or2y9p1out" data-title="ModSecurity" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/02/ModSecurity/" data-id="ckkxp2u1u000610ts0zqq5sn8" data-title="ModSecurity" class="article-share-link">Share</a>
       
       
       
@@ -427,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/" data-id="ckkwpxqgv000510oranp86zby" data-title="Linux 常用命令备用" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/" data-id="ckkxp2u1t000510ts8w6u4krf" data-title="Linux 常用命令备用" class="article-share-link">Share</a>
       
       
       
@@ -484,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/" data-id="ckkwpxqgz000a10or45gcf7p2" data-title="Visual Studio Code PHP需要的插件" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/" data-id="ckkxp2u1w000a10ts1r3l9fic" data-title="Visual Studio Code PHP需要的插件" class="article-share-link">Share</a>
       
       
       
@@ -542,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" data-id="ckkwpxqh1000e10oradfh0k2k" data-title="hexo图片插件" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" data-id="ckkxp2u1z000e10ts6zbpaj6b" data-title="hexo图片插件" class="article-share-link">Share</a>
       
       
       
@@ -592,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/21/hexo/" data-id="ckkwpxqh0000d10or4ovnhnu6" data-title="什么是 Hexo？" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/01/21/hexo/" data-id="ckkxp2u1y000d10tsdws48mrb" data-title="什么是 Hexo？" class="article-share-link">Share</a>
       
       
       
@@ -671,7 +680,7 @@
           </li>
         
           <li>
-            <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL(MariaDB)</a>
+            <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6</a>
           </li>
         
           <li>
