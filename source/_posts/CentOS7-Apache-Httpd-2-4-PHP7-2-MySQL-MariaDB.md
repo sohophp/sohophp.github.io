@@ -6,38 +6,39 @@ categories: [Linux,CentOS]
 toc: true
 --- 
 
-
 ## 安装CentOS7
 
-### 虛擬機 (VM: Virtual Machine) 最小安裝 CentOS7
+### 虚拟机安裝 CentOS7
 
-#### Hyper-V 
+#### 选择虚拟机 Virtual Machine
+
++ Hyper-V 
 
 windows10 自带
 开机自动运行保留开机前状态 
 好像不能复制
-#### VMware Workstation
++ VMware Workstation
 
 收费
 MacOS 下用 VMware Fusion
 可以用到Hyper-V,那不如直接Hyper-V
 可以复制 
-#### VirtualBox
++ VirtualBox
 
 免费
 可以用到Hyper-V 那不如直接Hyper-V
 可以复制
-#### Windows10 SubSystem
++ Windows10 SubSystem
 
 和windows10 共用端口，IP，WSL2 (实际也是基于SSH) 编辑器方便
 有各种问题，主要不能用systemctl！
 一定用到Hyper-V,那不如直接Hyper-V
 
-#### Docker
++ Docker
 麻烦，保证MySQL数据在宿主机不方便 
 迁移复制方便，可以直接部署上线。
 
----
+### 最小安装CentOS7
 以下是用 Hyper-V +　CentOS-7-x86_64-Minimal-2003.iso
 
 一個root密碼，一個管理員用戶（用于VSCode|PHPStorm 使用ssh|sftp直接编辑项目），
@@ -319,9 +320,9 @@ $ curl http://ip
 
 ---
 
-## MySQL5.6
+## 安装 MySQL5.6
   
-
+### 安装MySQL5.6
 ```Bash
 # CentOS7默认是mariadb,如果已经安装，卸载mariadb
 $ yum remove mariadb mariadb-server 
@@ -343,10 +344,23 @@ $ systemctl start mysqld
 $ systemctl enable mysqld
 ```
 
-首次安装设定root密码,删除匿名用户，删除test数据表，
+使用yum-config-manager 关闭mysql80-community 开启 mysql56-community 
+也可以直接编辑/etc/yum.repos.d/ 下的配置文件
+(非必要) 怕以后忘了更新成mysql8
+
+```Bash
+$ yum whatprovides yum-config-mananger
+$ yum install yum-utils
+$ yum repolist all | grep mysql
+$ yum-config-manager --disable  mysql80-community
+$ yum-config-manager --enable mysql56-community
+$ yum repolist all | grep -E 'mysql.*enabled'
+```
+### 初始化
+首次安装设定root密码,删除匿名用户，删除test数据库，
 ```Bash
 $ sudo mysql_secure_installation
-# 输入当前root密码，默认密码为空
+# 输入当前root密码，预设密码为空
 Enter current password for root (enter for none): 
 # 是否修改root密码 
 Set root password? [Y/n] y
@@ -360,12 +374,13 @@ Remove anonymous users? [Y/n] y
 Disallow root login remotely? [Y/n] y 
 # 删除测试(test)数据库
 Remove test database and access to it? [Y/n] y
-# 重新加载特权表，使用修改生效
+# 重新加载特权表，使修改生效
 Reload privilege tables now? [Y/n] y
 
 ```
 
-连接 mysql，添加用户。方便测试用%,正式使用localhost
+### 连接 MySQL ,添加用户。
+方便测试用%,正式使用localhost
 
 ```
 # 登录mysql
@@ -398,7 +413,16 @@ $ sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 # 查看PHP版本
 $ sudo yum search php | grep php72
 # 安装PHP72和用到的扩展
-$ sudo yum install php72w-cli php72w-common php72w-devel php72w-fpm php72w-gd php72w-mbstring php72w-mysqlnd php72w-pdo php72w-xml mod_php72w
+$ sudo yum install php72w-cli \
+php72w-common \
+php72w-devel \
+php72w-fpm \
+php72w-gd \
+php72w-mbstring \
+php72w-mysqlnd \
+php72w-pdo \
+php72w-xml \
+mod_php72w
 # 查看php版本
 $ php -v
 PHP 7.2.34 (cli) (built: Oct  1 2020 13:37:37) ( NTS )
@@ -440,22 +464,9 @@ https://cwiki.apache.org/confluence/display/HTTPD/PHP-FPM
 $ sudo systemctl enable php-fpm
 # 现在启动php-fpm
 $ sudo systemctl start php-fpm
-```
-查看php-fpm状态
-
-```Bash
+# 查看php-fpm状态
 $ sudo systemctl status php-fpm
- 
- ● php-fpm.service - The PHP FastCGI Process Manager
-   Loaded: loaded (/usr/lib/systemd/system/php-fpm.service; enabled; vendor preset: disabled)
-   Active: active (running) since Fri 2021-02-05 09:30:59 EST; 22min ago
- Main PID: 23148 (php-fpm)
-   Status: "Processes active: 0, idle: 5, Requests: 8, slow: 0, Traffic: 0req/sec"
-   CGroup: /system.slice/php-fpm.service
-           ├─23148 php-fpm: master process (/etc/php-fpm.conf)
-           ├─23149 php-fpm: pool www
 ```
-
 
 查看端口监听
 
@@ -467,7 +478,6 @@ tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN      
 所有.php使用php-fpm代理
 
 ```Bash
-
 $ sudo vim /etc/httpd/conf.d/php-fpm.conf
 
 > <FilesMatch \.php$>
@@ -629,8 +639,11 @@ curl -X PUT -I http://localhost
 ```Bash
 $ cd /etc/httpd/crs/rules
 $ cp REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+$ cp RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
 # 从 REQUEST-901-INITIALIZATION.conf 中复制一段修改加到REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf 下
 # id 要修改为唯一，在tx.allowed_methods里加PUT DELETE
+$ vim REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+
 SecRule &TX:allowed_methods "@eq 0" \
     "id:9011601,\
     phase:1,\
@@ -642,6 +655,28 @@ $ apachectl configtest
 $ systemctl restart httpd
 $ curl -X PUT -I http://localhost
 > HTTP/1.1 200 OK
+```
+
+### 添加白名单
+
+```Bash
+# 网站正常使用下出现异常403,多数是XSS相关的，对程序没影响，而且限制了表单内容如 <script  <iframe 等会用到的内容
+# 在网站正常使用出现403时。查看被限规则id
+# 如果太多先清空或者备份日志文件
+# $ echo "" >/var/log/httpd/error_log
+# 查看ModSecurity相关日志
+$ tail -f /var/log/httpd/error_log | grep ModSecurity
+# 找到 [id "941160"] 这类id,把规则id加到自己建的白名单文件
+$ echo "SecRuleRemoveById 941160" >> /etc/httpd/crs/rules/white-list.conf
+$ echo "SecRuleRemoveById 949110" >> /etc/httpd/crs/rules/white-list.conf
+$ echo "SecRuleRemoveById 980130" >> /etc/httpd/crs/rules/white-list.conf
+$ cat /etc/httpd/crs/rules/white-list.conf
+> SecRuleRemoveById 941160
+> SecRuleRemoveById 949110
+> SecRuleRemoveById 980130
+# 重启apache
+$ systemctl restart httpd
+
 ```
 
 ### mod_evasive DDos 防火墙 for apache
@@ -673,7 +708,8 @@ LoadModule evasive20_module modules/mod_evasive24.so
     DOSHashTableSize    3097
     # 同一页每DOSPageInterval秒最大请求数，超过会把IP加入黑名单，预设 2          
     DOSPageCount        3       
-    # 同一个网站每DOSSiteInterval秒最大请求数，超过会把IP加入黑名单  预设 50,考虑一个网页有多个css,js,图片等可以大些
+    # 同一个网站每DOSSiteInterval秒最大请求数，超过会把IP加入黑名单  
+    # 预设 50,考虑一个网页有多个css,js,图片等可以大些
     DOSSiteCount        50       
     DOSPageInterval     1        
     DOSSiteInterval     1
@@ -699,7 +735,6 @@ $ systemctl restart httpd
 ```
 
 ---
-
 
 ## 其它
 
