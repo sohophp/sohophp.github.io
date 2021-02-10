@@ -38,14 +38,45 @@
             <category>PHP</category>
             <category>Visual Sudio Code</category>
             <pubDate>Fri, 29 Jan 2021 16:46:32 +0000</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;Markdown-Preview-Enhanced&#34;&gt;&lt;a href=&#34;#Markdown-Preview-Enhanced&#34; class=&#34;headerlink&#34; title=&#34;Markdown Preview Enhanced&#34;&gt;&lt;/a&gt;Markdown Preview Enhanced&lt;/h2&gt;&lt;h3 id=&#34;引用介绍&#34;&gt;&lt;a href=&#34;#引用介绍&#34; class=&#34;headerlink&#34; title=&#34;引用介绍:&#34;&gt;&lt;/a&gt;引用介绍:&lt;/h3&gt;&lt;p&gt;Markdown Preview Enhanced 是一款为 Atom 以及 Visual Studio Code 编辑器编写的超级强大的 Markdown 插件。 这款插件意在让你拥有飘逸的 Markdown 写作体验。 &lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;以下插件按名称顺序排列&lt;/p&gt;
+&lt;h2 id=&#34;Apache-Conf&#34;&gt;&lt;a href=&#34;#Apache-Conf&#34; class=&#34;headerlink&#34; title=&#34;Apache Conf&#34;&gt;&lt;/a&gt;Apache Conf&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;引用介绍&lt;br&gt;Syntax highlighing for Apache conf files in Visual Studio Code. Ported from ApacheConf.tmLanguage.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用体验&lt;br&gt; Apache的conf语法高亮，常用在 .htaccess &lt;/p&gt;
+&lt;img src=&#34;/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20210210224932.png&#34; class=&#34;&#34; title=&#34;Apache Conf&#34;&gt; 
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+
+&lt;h2 id=&#34;Auto-Close-Tag&#34;&gt;&lt;a href=&#34;#Auto-Close-Tag&#34; class=&#34;headerlink&#34; title=&#34;Auto Close Tag&#34;&gt;&lt;/a&gt;Auto Close Tag&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;引用介绍&lt;br&gt;Automatically add HTML/XML close tag, same as Visual Studio IDE or Sublime Text does.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用体验&lt;br&gt;和Visual Studio IDE或Sublime Text一样，自动添加HTML/XML关闭标记。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Auto-Rename-Tag&#34;&gt;&lt;a href=&#34;#Auto-Rename-Tag&#34; class=&#34;headerlink&#34; title=&#34;Auto Rename Tag&#34;&gt;&lt;/a&gt;Auto Rename Tag&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引用介绍&lt;br&gt;Automatically rename paired HTML/XML tag, same as Visual Studio IDE does.&lt;/li&gt;
+&lt;li&gt;使用体验&lt;br&gt;自动重命名配对的HTML/XML标记，与Visual Studio IDE一样。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Auto-Save-on-Window-Change&#34;&gt;&lt;a href=&#34;#Auto-Save-on-Window-Change&#34; class=&#34;headerlink&#34; title=&#34;Auto-Save on Window Change&#34;&gt;&lt;/a&gt;Auto-Save on Window Change&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引用介绍&lt;br&gt;With this extension you DON’T NEED TO press Ctrl + S anymore.&lt;br&gt;Whenever you Alt + Tab between windows your progress is automatically saved.&lt;/li&gt;
+&lt;li&gt;使用体验&lt;br&gt;有了这个扩展，你不需要再按Ctrl + S。&lt;br&gt; 每当你Alt + Tab 切换窗口时会自动保存。&lt;h2 id=&#34;Code-Spell-Checker&#34;&gt;&lt;a href=&#34;#Code-Spell-Checker&#34; class=&#34;headerlink&#34; title=&#34;Code Spell Checker&#34;&gt;&lt;/a&gt;Code Spell Checker&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;引用绍介&lt;br&gt;A basic spell checker that works well with camelCase code.&lt;br&gt;The goal of this spell checker is to help catch common spelling errors while keeping the number of false positives low.&lt;/li&gt;
+&lt;li&gt;使用体验&lt;br&gt;一个基本的拼写检查程序，可以很好地处理驼峰大小写代码。&lt;br&gt;这个拼写检查器的目标是帮助捕获常见的拼写错误，同时保持低误报的数量。&lt;h2 id=&#34;ES7-React-Redux-GraphQL-React-Native-snippets&#34;&gt;&lt;a href=&#34;#ES7-React-Redux-GraphQL-React-Native-snippets&#34; class=&#34;headerlink&#34; title=&#34;ES7 React/Redux/GraphQL/React-Native snippets&#34;&gt;&lt;/a&gt;ES7 React/Redux/GraphQL/React-Native snippets&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;引用介绍&lt;br&gt;This extension provides you JavaScript and React/Redux snippets in ES7 with Babel plugin features for VS Code&lt;/li&gt;
+&lt;li&gt;使用体验&lt;br&gt;这个扩展为你提供JavaScript和React/Redux片段ES7与VS Code的Babel插件功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ESLint&#34;&gt;&lt;a href=&#34;#ESLint&#34; class=&#34;headerlink&#34; title=&#34;ESLint&#34;&gt;&lt;/a&gt;ESLint&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引用介绍&lt;br&gt;Integrates ESLint JavaScript into VS Code.&lt;/li&gt;
+&lt;li&gt;使用体验&lt;br&gt;查找并修复 JavaScript 代码中的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Markdown-Preview-Enhanced&#34;&gt;&lt;a href=&#34;#Markdown-Preview-Enhanced&#34; class=&#34;headerlink&#34; title=&#34;Markdown Preview Enhanced&#34;&gt;&lt;/a&gt;Markdown Preview Enhanced&lt;/h2&gt;&lt;h3 id=&#34;引用介绍&#34;&gt;&lt;a href=&#34;#引用介绍&#34; class=&#34;headerlink&#34; title=&#34;引用介绍:&#34;&gt;&lt;/a&gt;引用介绍:&lt;/h3&gt;&lt;p&gt;Markdown Preview Enhanced 是一款为 Atom 以及 Visual Studio Code 编辑器编写的超级强大的 Markdown 插件。 这款插件意在让你拥有飘逸的 Markdown 写作体验。 &lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/1908863/28227953-eb6eefa4-68a1-11e7-8769-96ea83facf3b.png&#34; alt=&#34;Markdown Preview Enhanced&#34; title=&#34;Markdown Preview Enhanced 官网图片&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;插件网址&#34;&gt;&lt;a href=&#34;#插件网址&#34; class=&#34;headerlink&#34; title=&#34;插件网址&#34;&gt;&lt;/a&gt;插件网址&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/&#34;&gt;https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/&lt;/a&gt; &lt;/p&gt;
 &lt;h3 id=&#34;使用体验&#34;&gt;&lt;a href=&#34;#使用体验&#34; class=&#34;headerlink&#34; title=&#34;使用体验&#34;&gt;&lt;/a&gt;使用体验&lt;/h3&gt;&lt;p&gt;用来编辑Markdown文档时预览功能 &lt;/p&gt;
-&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;IntelliJ-IDEA-Keybindings&#34;&gt;&lt;a href=&#34;#IntelliJ-IDEA-Keybindings&#34; class=&#34;headerlink&#34; title=&#34;IntelliJ IDEA Keybindings&#34;&gt;&lt;/a&gt;IntelliJ IDEA Keybindings&lt;/h2&gt;&lt;h3 id=&#34;引用介绍-1&#34;&gt;&lt;a href=&#34;#引用介绍-1&#34; class=&#34;headerlink&#34; title=&#34;引用介绍&#34;&gt;&lt;/a&gt;引用介绍&lt;/h3&gt;&lt;p&gt;Port of IntelliJ IDEA key bindings for VS Code. Includes keymaps for popular JetBrains products like IntelliJ Ultimate, WebStorm, PyCharm, PHP Storm, etc.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/kasecato/vscode-intellij-idea-keybindings/raw/master/images/usage_intellij_importer.gif&#34; alt=&#34;引用 IntelliJ IDEA Keybindings 图片&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;插件网址-1&#34;&gt;&lt;a href=&#34;#插件网址-1&#34; class=&#34;headerlink&#34; title=&#34;插件网址&#34;&gt;&lt;/a&gt;插件网址&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings&#34;&gt;https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;使用体验-1&#34;&gt;&lt;a href=&#34;#使用体验-1&#34; class=&#34;headerlink&#34; title=&#34;使用体验&#34;&gt;&lt;/a&gt;使用体验&lt;/h3&gt;&lt;p&gt;习惯了 IntelliJ IDEA (PHPStorm) 的快捷键，安装它后常用快捷键会和PHPStorm相同&lt;/p&gt;
 &lt;hr&gt;
