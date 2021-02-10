@@ -484,6 +484,7 @@ $ sudo vim /etc/httpd/conf.d/php-fpm.conf
 >    SetHandler "proxy:fcgi://127.0.0.1:9000"
 > </FilesMatch>
 ```
+
 重启apache测试
 ```Bash
 # 配置是否有錯
@@ -493,6 +494,17 @@ $ sudo systemctl restart httpd
 # 测试php-fpm
 $ curl http://localhost/index.php | grep php-fpm
 
+```
+
+### 使用 .user.ini
+```Bash
+$ var /etc/php.ini
+user_ini.filename = ".user.ini"
+user_ini.cache_ttl = 300
+$ systemctl restart httpd
+# 在站点下新|修改.user.ini ,有缓存时间不会立即生效
+$ vim .user.ini
+> upload_max_filesize="20M"
 ```
 
  ### 创建VirtualHost，使用自定域名/主机名，开启rewrite,.htaccess
@@ -660,9 +672,8 @@ $ curl -X PUT -I http://localhost
 ### 添加白名单
 
 ```Bash
-# 网站正常使用下出现异常403,多数是XSS相关的，对程序没影响，而且限制了表单内容如 <script  <iframe 等会用到的内容
-# 在网站正常使用出现403时。查看被限规则id
-# 如果太多先清空或者备份日志文件
+
+# 清空或者备份日志文件
 # $ echo "" >/var/log/httpd/error_log
 # 查看ModSecurity相关日志
 $ tail -f /var/log/httpd/error_log | grep ModSecurity
@@ -676,13 +687,40 @@ $ cat /etc/httpd/crs/rules/white-list.conf
 > SecRuleRemoveById 980130
 # 重启apache
 $ systemctl restart httpd
-
+$ echo "" >/var/log/httpd/error_log
+$ tail -f /var/log/httpd/error_log
+# 再测试还是有太多被匹配到。只是因为没有达到阈值能通过。
+# 再测试找到误判id逐个写到white-list.conf
+# 可能有重复的删除
+$ sort white-list.conf | uniq > tmp.conf ;mv -f tmp.conf white-list.conf
+$ cat white-list.conf
+SecRuleRemoveById 11862
+SecRuleRemoveById 932100
+SecRuleRemoveById 932110
+SecRuleRemoveById 932130
+SecRuleRemoveById 941100
+SecRuleRemoveById 941110
+SecRuleRemoveById 941160
+SecRuleRemoveById 941310
+SecRuleRemoveById 942100
+SecRuleRemoveById 949110
+SecRuleRemoveById 980130
+# 测试阶段可以修改 SecRuleEngine 为只检测
+$ vim /etc/httpd/conf.d/mod_security.conf
+#SecRuleEngine On
+SecRuleEngine DetectionOnly
+# 测试没问题再改为 On
+# 重启 Apache 再接受蹂躏
+$ systemctl restart httpd
 ```
 
 ### mod_evasive DDos 防火墙 for apache
-
-***最好是有硬件防火墙!***
-
+ 
+一定要有DDOS防火墙！！！
+不然就等于光着身子被乱箭穿身，
+总能被刺中一次！
+最好是有硬件防火墙! 
+===
 
 参考网址
 https://www.digitalocean.com/community/tutorials/how-to-protect-against-dos-and-ddos-with-mod_evasive-for-apache-on-centos-7
