@@ -387,8 +387,8 @@ Reload privilege tables now? [Y/n] y
 $ mysql -u root -p
 # 新建用户
 MySQL> CREATE USER '用户名'@'%' IDENTIFIED BY '密码';
-# 赋予权限
-MySQL> GRANT PRIVILEGES ON *.* TO '用户名'@'%';
+# 赋予权限,简单方便用 ALL
+MySQL> GRANT ALL PRIVILEGES ON *.* TO '用户名'@'%';
 # 使生效 
 MySQL> FLUSH PRIVILEGES;
 # 退出
