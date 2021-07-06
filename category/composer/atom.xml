@@ -19,10 +19,13 @@
     <category term="Httpd" />
     <category term="SELinux" />
     <category term="Visual Sudio Code" />
+    <category term="docker" />
+    <category term="Docker" />
     <category term="Hexo" />
     <category term="Markdown" />
-    <category term="Image" />
-    <category term="Javascript" />
+    <category term="php" />
+    <category term="ubuntu" />
+    <category term="linux" />
     <category term="PHP7" />
     <category term="PHP7.2" />
     <category term="MySQL" />

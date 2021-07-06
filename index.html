@@ -75,6 +75,399 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-it-is-okay" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/06/it-is-okay/" class="article-date">
+  <time class="dt-published" datetime="2021-07-06T23:28:20.000Z" itemprop="datePublished">2021-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/06/it-is-okay/">it&#39;is okay</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>You can’t wait until life isn’t hard anymore , before you decide to be happy.</p>
+</blockquote>
+<blockquote>
+<p>你不能等到生活不再艰难了，再决定让自己快乐起来。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/CZJvBfoHDk0">https://youtu.be/CZJvBfoHDk0</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/07/06/it-is-okay/" data-id="ckqs8au9v000s0umz7ccm8u7a" data-title="it&#39;is okay" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-docker-ubuntu-postfix-mysql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/21/docker-ubuntu-postfix-mysql/" class="article-date">
+  <time class="dt-published" datetime="2021-05-21T15:51:54.000Z" itemprop="datePublished">2021-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/21/docker-ubuntu-postfix-mysql/">ubuntu下安装postfix+mysql+dovecot</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新系统</span></span><br><span class="line">$ apt update </span><br><span class="line"><span class="comment"># 查看系统版本</span></span><br><span class="line">$ uname -a </span><br><span class="line"><span class="comment"># Linux 3fd33fb882db 5.8.0-53-generic #60~20.04.1-Ubuntu SMP Thu May 6 09:52:46 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为我基于docker安装的ubuntu缺少一些工具</span></span><br><span class="line"></span><br><span class="line">$ apt install iputils-ping vim net-tools telnet</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="新建mysql数据库-已安装mysql-server，使用docker另一个mysql容器"><a href="#新建mysql数据库-已安装mysql-server，使用docker另一个mysql容器" class="headerlink" title="新建mysql数据库 (已安装mysql-server，使用docker另一个mysql容器)"></a>新建mysql数据库 (已安装mysql-server，使用docker另一个mysql容器)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建postfix用户，数据库和数据表,</span></span><br><span class="line">mysql&gt; CREATE DATABASE postfix;</span><br><span class="line"><span class="comment"># 选择postfix;</span></span><br><span class="line">mysql&gt; USE postfix;</span><br><span class="line"><span class="comment"># 创建postfix用户密码</span></span><br><span class="line">mysql&gt; CREATE USER postfix@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;postfix&#x27;</span>;</span><br><span class="line"><span class="comment"># 指派权限</span></span><br><span class="line">mysql&gt; GRANT SELECT ,INSERT ,UPDATE ,DELETE ON postfix.* TO <span class="string">&#x27;postfix&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="comment"># 刷新</span></span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line"><span class="comment"># 创建 domains表</span></span><br><span class="line">mysql&gt; CREATE TABLE domains (domain varchar(50) NOT NULL,PRIMARY KEY (domain));</span><br><span class="line"><span class="comment"># 创建 forwardings表</span></span><br><span class="line">mysql&gt; CREATE TABLE forwardings (<span class="built_in">source</span> varchar(80) NOT NULL,destination TEXT NOT NULL,PRIMARY KEY(<span class="built_in">source</span>));</span><br><span class="line"><span class="comment"># 创建 users表</span></span><br><span class="line">mysql&gt; CREATE TABLE users (email varchar(80) NOT NULL,`password` varchar(64) NOT NULL, quota int(10) default <span class="string">&#x27;104857600&#x27;</span> , PRIMARY KEY (email));</span><br><span class="line"><span class="comment"># 创建 transport表</span></span><br><span class="line">mysql&gt; CREATE TABLE transport (domain varchar(128) NOT NULL default <span class="string">&#x27;&#x27;</span>,transport varchar(128) NOT NULL default <span class="string">&#x27;&#x27;</span>,UNIQUE KEY domain (domain));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 域名</span></span><br><span class="line">mysql&gt; insert into domains values (<span class="string">&#x27;postfix.local&#x27;</span>);</span><br><span class="line"><span class="comment"># 邮箱用户</span></span><br><span class="line">mysql&gt; insert into users values (<span class="string">&#x27;user1@postfix.local&#x27;</span>,ENCRYPT(<span class="string">&#x27;user1&#x27;</span>),104857600);</span><br><span class="line"><span class="comment"># 创建邮件转发，多个邮箱地址使用,隔开</span></span><br><span class="line">mysql&gt; insert into forwardings values(<span class="string">&#x27;user2@postfix.local&#x27;</span>,<span class="string">&#x27;user1@postfix.local,user3@postfix.local&#x27;</span>);</span><br><span class="line"><span class="comment"># 转发所有邮件到另外的邮件服务器</span></span><br><span class="line"><span class="comment">#INSERT INTO transport VALUES (&#x27;domain.com&#x27;, &#x27;smtp:server2.domain.com&#x27;);</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装postfix"><a href="#安装postfix" class="headerlink" title="安装postfix"></a>安装postfix</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖</span></span><br><span class="line">$ apt install openssl telnet libsasl2-2 libsasl2-modules libsasl2-modules-sql sasl2-bin libpam-mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装postfix</span></span><br><span class="line">$ apt install postfix postfix-mysql postfix-doc mailutils</span><br><span class="line"> </span><br><span class="line"><span class="comment"># General type of mail configuration 输入数字 2 （Internet Site）</span></span><br><span class="line"><span class="comment"># System Mail Name 输入 postfix.local </span></span><br><span class="line"><span class="comment"># Geographic area 时区输入数字 6 (Asia)</span></span><br><span class="line"><span class="comment"># Time Zone 输入数字 70 (Shanghai)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p>虚拟domain配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/postfix/mysql-virtual-domains.cf</span><br></pre></td></tr></table></figure>
+<p>内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user = postfix</span><br><span class="line">password = postfix</span><br><span class="line">dbname = postfix</span><br><span class="line">query = SELECT domain AS virtual FROM domains WHERE domain = <span class="string">&#x27;%s&#x27;</span></span><br><span class="line">hosts = 172.18.0.136</span><br></pre></td></tr></table></figure>
+<p>虚拟forwarding配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/postfix/mysql-virtual-forwardings.cf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user = postfix</span><br><span class="line">password = postfix</span><br><span class="line">dbname = postfix</span><br><span class="line">query = SELECT destination FROM forwardings WHERE <span class="built_in">source</span>=<span class="string">&#x27;%s&#x27;</span></span><br><span class="line">hosts = 172.18.0.136</span><br></pre></td></tr></table></figure>
+<p>虚拟mailbox配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/postfix/mysql-virtual-mailboxes.cf</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user = postfix</span><br><span class="line">password = postfix</span><br><span class="line">dbname = postfix</span><br><span class="line">query = SELECT CONCAT(SUBSTRING_INDEX (email,<span class="string">&#x27;@&#x27;</span>,-1),<span class="string">&#x27;/&#x27;</span>,SUBSTRING_INDEX(email,<span class="string">&#x27;@&#x27;</span>,1),<span class="string">&#x27;/&#x27;</span>) FROM users WHERE email=<span class="string">&#x27;%s&#x27;</span></span><br><span class="line">hosts = 172.18.0.136</span><br></pre></td></tr></table></figure>
+<p>虚拟email2email配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/postfix/mysql-virtual-email2email.cf</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user = postfix</span><br><span class="line">password = postfix</span><br><span class="line">dbname = postfix</span><br><span class="line">query = SELECT email FROM users WHERE email=<span class="string">&#x27;%s&#x27;</span></span><br><span class="line">hosts = 172.18.0.136</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/postfix/mysql-virtual-mydestination.cf</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">user = postfix</span><br><span class="line">password = postfix</span><br><span class="line">dbname = postfix</span><br><span class="line">table = transport</span><br><span class="line">select_field = domain</span><br><span class="line">where_field = domain</span><br><span class="line">hosts = 172.18.0.136</span><br></pre></td></tr></table></figure>
+<p>修改配置文件权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改/etc/postfix/mysql-virtual-*.cf 用户组为postfix</span></span><br><span class="line">$ chgrp postfix /etc/postfix/mysql-virtual-*.cf</span><br><span class="line"><span class="comment"># 禁止other用户访问</span></span><br><span class="line">$ chmod o= /etc/postfix/mysql-virtual-*.cf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>创建证书</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ mkdir /etc/postfix/certs</span><br><span class="line">$ <span class="built_in">cd</span> /etc/postfix/certs</span><br><span class="line"><span class="comment"># 创建证书</span></span><br><span class="line">$ openssl req -new -outform PEM -out smtpd.cert -newkey rsa:2048 -nodes -keyout smtpd.key -keyform PEM -days 3650 -x509</span><br><span class="line"><span class="comment"># 修改权限</span></span><br><span class="line">$ chmod o= smtpd.key</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>创建用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ groupadd -g 5000 vmail</span><br><span class="line">$ useradd -c <span class="string">&#x27;vmail&#x27;</span> -g vmail -u 5000 vmail -d /home/vmail -m</span><br></pre></td></tr></table></figure>
+<p>使用postconf 配置main.cf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">$ postconf -e <span class="string">&#x27;myhostname = postfix.local&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;mydestination = localhost , proxy:mysql:/etc/postfix/mysql-virtual-mydestination.cf&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;mynetworks = 127.0.0.0/8, 172.18.0.125&#x27;</span> </span><br><span class="line">$ postconf -e <span class="string">&#x27;message_size_limit = 30720000&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_alias_domains =&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_alias_maps = proxy:mysql:/etc/postfix/mysql-virtual-forwardings.cf, mysql:/etc/postfix/mysql-virtual-email2email.cf&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_mailbox_domains = proxy:mysql:/etc/postfix/mysql-virtual-domains.cf&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_mailbox_maps = proxy:mysql:/etc/postfix/mysql-virtual-mailboxes.cf&#x27;</span></span><br><span class="line"></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_mailbox_base = /home/vmail&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_uid_maps = static:5000&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_gid_maps = static:5000&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_sasl_auth_enable = yes&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;broken_sasl_auth_clients = yes&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_sasl_authenticated_header = yes&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_use_tls = yes&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_tls_cert_file = /etc/postfix/certs/smtpd.cert&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;smtpd_tls_key_file = /etc/postfix/certs/smtpd.key&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为同一行</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;proxy_read_maps = $local_recipient_maps $mydestination $virtual_alias_maps $virtual_alias_domains    $virtual_mailbox_maps $virtual_mailbox_domains $relay_recipient_maps $relay_domains $canonical_maps $sender_canonical_maps $recipient_canonical_maps $relocated_maps $transport_maps $mynetworks &#x27;</span></span><br><span class="line"><span class="comment"># 以上为同一行</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#其它参考</span></span><br><span class="line"><span class="comment">#  queue_run_delay = 3s          //每3s扫描一次delay的邮件 </span></span><br><span class="line"><span class="comment">#  minimal_backoff_time = 3s         //在3s内不会重发delay的邮件</span></span><br><span class="line"><span class="comment">#  maximal_backoff_time = 6s         //在6s内则一定会重发邮件</span></span><br><span class="line"><span class="comment">#  maximal_queue_lifetime = 12s      //邮件超过12s没有发出，则退信</span></span><br><span class="line"><span class="comment">#  smtpd_sasl_auth_enable = yes      //启动SMTP认证</span></span><br><span class="line"><span class="comment">#  smtpd_sasl_security_options = noanonymous //禁止匿名使用SMTP服务</span></span><br><span class="line"><span class="comment">#  mynetworks = 127.0.0.1        //允许本服务器发送到外网地址</span></span><br><span class="line"><span class="comment">#  smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination  //定义地址过滤规则</span></span><br><span class="line"></span><br><span class="line">$ postconf -e <span class="string">&#x27;virtual_transport = dovecot&#x27;</span></span><br><span class="line">$ postconf -e <span class="string">&#x27;local_transport = dovecot&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>配置saslauthd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /var/spool/postfix/var/run/saslauthd</span><br><span class="line">$ cp -a /etc/default/saslauthd /etc/default/saslauthd.bak</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/default/saslauthd</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">START=yes</span><br><span class="line">DESC=<span class="string">&quot;SASL Authentication Daemon&quot;</span></span><br><span class="line">NAME=<span class="string">&quot;saslauthd&quot;</span></span><br><span class="line">MECHANISMS=<span class="string">&quot;pam&quot;</span></span><br><span class="line">MECH_OPTIONS=<span class="string">&quot;&quot;</span></span><br><span class="line">THREADS=5</span><br><span class="line">OPTIONS=<span class="string">&quot;-c -m /var/spool/postfix/var/run/saslauthd -r&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/pam.d/smtp</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auth    required   pam_mysql.so user&#x3D;postfix passwd&#x3D;postfix host&#x3D;172.18.0.136 db&#x3D;postfix table&#x3D;users usercolumn&#x3D;email passwdcolumn&#x3D;password crypt&#x3D;1</span><br><span class="line">account sufficient pam_mysql.so user&#x3D;postfix passwd&#x3D;postfix host&#x3D;172.168.0.136 db&#x3D;postfix table&#x3D;users usercolumn&#x3D;email passwdcolumn&#x3D;password crypt&#x3D;1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/postfix/sasl/smtpd.conf</span><br></pre></td></tr></table></figure>
+<p>内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pwcheck_method: saslauthd</span><br><span class="line">mech_list: plain login</span><br><span class="line">allow_plaintext: true</span><br><span class="line">auxprop_plugin: sql</span><br><span class="line">sql_engine: mysql</span><br><span class="line">sql_hostnames: 172.18.0.136</span><br><span class="line">sql_user: postfix</span><br><span class="line">sql_passwd: postfix</span><br><span class="line">sql_database: postfix</span><br><span class="line">sql_select: select password from users where email &#x3D; &#39;%u@%r&#39;</span><br></pre></td></tr></table></figure>
+<p>修改权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod o= /etc/pam.d/smtp</span><br><span class="line">$ chmod o= /etc/postfix/sasl/smtpd.conf</span><br></pre></td></tr></table></figure>
+<p>postfix加到sasl组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adduser postfix sasl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>重启postfix ,saslauthd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/postfix restart</span><br><span class="line">$ /etc/init.d/saslauthd restart</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/05/21/docker-ubuntu-postfix-mysql/" data-id="ckqs8au9o000e0umzbzpwcqq1" data-title="ubuntu下安装postfix+mysql+dovecot" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-ubuntu20-install-php7-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/03/ubuntu20-install-php7-2/" class="article-date">
+  <time class="dt-published" datetime="2021-05-03T11:15:00.000Z" itemprop="datePublished">2021-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/03/ubuntu20-install-php7-2/">ubuntu20 install php7.2</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># update and upgrade</span></span><br><span class="line"></span><br><span class="line">$ sudo apt update &amp;&amp; apt upgrade</span><br><span class="line"><span class="comment"># install software-properties-common</span></span><br><span class="line"></span><br><span class="line">$ sudo apt-get install software-properties-common</span><br><span class="line"></span><br><span class="line"><span class="comment"># add apt repository ppa:ondrej/php</span></span><br><span class="line"></span><br><span class="line">$ sudo add-apt-repository ppa:ondrej/php</span><br><span class="line"><span class="comment"># install php7.2 and extensions</span></span><br><span class="line"><span class="comment"># optional: libapache2-mod-php7.2 </span></span><br><span class="line"><span class="comment"># optional: php7.2-xdebug  </span></span><br><span class="line">$ sudo apt install php7.2 \</span><br><span class="line">php7.2-cli \</span><br><span class="line">php7.2-common \</span><br><span class="line">php7.2-curl \</span><br><span class="line">php7.2-fpm \</span><br><span class="line">php7.2-gd \</span><br><span class="line">php7.2-json \</span><br><span class="line">php7.2-mbstring \</span><br><span class="line">php7.2-mcrypt \</span><br><span class="line">php7.2-mysql  \</span><br><span class="line">php7.2-opcache \</span><br><span class="line">php7.2-sqlite3 \</span><br><span class="line">php7.2-yaml \</span><br><span class="line">php7.2-zip \</span><br><span class="line">php7.2-dom</span><br><span class="line"><span class="comment"># enable startup php7.2-fpm</span></span><br><span class="line">$ sudo systemctl <span class="built_in">enable</span> php7.2-fpm</span><br><span class="line"><span class="comment"># start php7.2-fpm</span></span><br><span class="line">$ sudo systemctl start php7.2-fpm</span><br><span class="line">$ sudo systemctl status php7.2-fpm</span><br><span class="line">$ sudo a2enmod proxy_fcgi setenvif</span><br><span class="line"><span class="comment"># enable rewrite</span></span><br><span class="line">$ sudo a2emod <span class="built_in">enable</span> rewrite</span><br><span class="line"><span class="comment"># enable php7.2-fpm</span></span><br><span class="line">$ sudo a2enconf php7.2-fpm</span><br><span class="line">$ sudo systemctl restart apache2</span><br><span class="line"><span class="comment"># 切換默認php命令 php7.2,php7.4 ...</span></span><br><span class="line">update-alternatives --<span class="built_in">set</span> php /usr/bin/php7.2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/05/03/ubuntu20-install-php7-2/" data-id="ckqs8au9x000w0umzgda26zbx" data-title="ubuntu20 install php7.2" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/03/docker/" class="article-date">
+  <time class="dt-published" datetime="2021-03-03T12:53:57.000Z" itemprop="datePublished">2021-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/03/docker/">docker</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql容器使用固定IP方法"><a href="#mysql容器使用固定IP方法" class="headerlink" title="mysql容器使用固定IP方法"></a>mysql容器使用固定IP方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建自定网络</span></span><br><span class="line">docker network create --subnet=172.18.0.0/16 mynetwork</span><br><span class="line"><span class="comment"># 指定使用的网络和ip运行mysql</span></span><br><span class="line">docker run -p 33306:3306 --name mysql -v /home/jason/var/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=xxxxxx --net mynetwork --ip 172.18.0.136 -d mysql:5.6 </span><br><span class="line">docker run --name php -v /home/jason/webroot:/var/www/html --net mynetwork --ip 172.18.0.80 -itd sohophp/php-multi-apache:latest start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/03/03/docker/" data-id="ckqs8au9s000k0umzfaakc3cu" data-title="docker" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-docker-减小体积生成新的镜像" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/" class="article-date">
+  <time class="dt-published" datetime="2021-02-27T14:46:52.000Z" itemprop="datePublished">2021-02-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/">docker 减小体积生成新的镜像</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Docker commit 每次都会加大镜像体积</p>
+<p>解决办法:</p>
+<p>使用Docker import 导入系统文件,丢弃镜像历史引用.</p>
+<p>同样适用于全新安装系统生成docker镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看容器id, &#123;container_id&#125;</span></span><br><span class="line">$ docker ps</span><br><span class="line"><span class="comment"># 开启一个&#123;container_id&#125;的交互式终端</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it &#123;container_id&#125; bash</span><br><span class="line">$ <span class="built_in">cd</span> /</span><br><span class="line"><span class="comment"># 清理,同时可以删除和清理其它</span></span><br><span class="line">$ yum clean all &amp;&amp; <span class="built_in">history</span> -cw</span><br><span class="line"><span class="comment"># 查看/目录文件大小</span></span><br><span class="line">$ du -h --exclude=/proc --exclude=/sys /</span><br><span class="line"><span class="comment"># 压缩成base.tar 排除/proc和/sys</span></span><br><span class="line"><span class="comment"># 在使用--exclude=/proc时会出错，所以使用 &gt;/dev/null 可以看到错误消息</span></span><br><span class="line">$ tar --exclude=/proc --exclude=/sys --exclude=/base.tar -cvf base.tar / &gt;/dev/null</span><br><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 复制容器&#123;ontainer_id&#125;中的/base.tar文件到当前目录</span></span><br><span class="line">$ docker cp &#123;container_id&#125;:/base.tar .</span><br><span class="line"><span class="comment"># 使用base.tar 生成&#123;image_name&#125; 镜像</span></span><br><span class="line">$ cat base.tar | docker import - &#123;image_name&#125;</span><br><span class="line"><span class="comment"># 查看生成的镜像 (1.28G 转换后501Mb )</span></span><br><span class="line">$ docker image ls</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/" data-id="ckqs8au9r000i0umz1qs9a6j6" data-title="docker 减小体积生成新的镜像" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-ubuntu20-001" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/26/ubuntu20-001/" class="article-date">
+  <time class="dt-published" datetime="2021-02-26T17:47:23.000Z" itemprop="datePublished">2021-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/26/ubuntu20-001/">ubuntu20-001</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="取消鼠标中键粘贴功能"><a href="#取消鼠标中键粘贴功能" class="headerlink" title="取消鼠标中键粘贴功能"></a>取消鼠标中键粘贴功能</h2><p>新建开机启动命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile.d/xmodmap.sh</span><br></pre></td></tr></table></figure>
+<p>xmodmap.sh 内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 取消鼠标中键粘贴功能,</span></span><br><span class="line"><span class="comment"># 不输出错误消息 Warning: Only changing the first 8 of 10 buttons.</span></span><br><span class="line">xmodmap -e <span class="string">&#x27;pointer = 1 25 3 4 5 6 7 2&#x27;</span> 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<h2 id="优化开机启慢问题"><a href="#优化开机启慢问题" class="headerlink" title="优化开机启慢问题"></a>优化开机启慢问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出开机启动占用时间长的服务</span></span><br><span class="line">$ systemd-analyze blame </span><br><span class="line"></span><br><span class="line"><span class="comment"># 46.780s plymouth-quit-wait.service   </span></span><br><span class="line"><span class="comment"># 关闭开机启动动画，反向操作用umask</span></span><br><span class="line">sudo systemctl mask plymouth-quit-wait.service</span><br><span class="line"><span class="comment"># 关闭自动升级</span></span><br><span class="line">sudo systemctl <span class="built_in">disable</span> apt-daily.service</span><br><span class="line"><span class="comment"># 修改启动时选择系统的等待时间，默认10秒，修改为2秒</span></span><br><span class="line"><span class="comment"># GRUB_TIMEOUT=2</span></span><br><span class="line">sudo vim /etc/default/grub</span><br><span class="line"><span class="comment"># 更新开机引导</span></span><br><span class="line">sudo update-grub</span><br><span class="line"><span class="comment"># 设置开机分辨率，解决开机黑屏时间长，</span></span><br><span class="line">sudo apt-get install v86d hwinfo</span><br><span class="line"><span class="comment"># 查看显示卡支持的分辨率</span></span><br><span class="line">sudo hwinfo --framebuffer</span><br><span class="line"><span class="comment"># 修改grub加一行</span></span><br><span class="line"><span class="comment"># GRUB_GFXPAYLOAD_LINUX=1024×768x24</span></span><br><span class="line">sudo vim /etc/default/grub</span><br><span class="line"><span class="comment">#启用framebuffer</span></span><br><span class="line"><span class="built_in">echo</span> FRAMEBUFFER=y | sudo tee /etc/initramfs-tools/conf.d/splash</span><br><span class="line"><span class="comment">#更新设置：</span></span><br><span class="line">sudo update-grub</span><br><span class="line">sudo update-grub2</span><br><span class="line">sudo update-initramfs -u</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装经典桌面，解决卡顿</span></span><br><span class="line"><span class="comment"># 启动后登录画面选择 Gnome Flashback</span></span><br><span class="line">sudo apt install gnome-session-flashback </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看硬盘读写速度</span></span><br><span class="line">$ hdparm -t /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用gparted把目标硬盘分区 </span></span><br><span class="line"><span class="comment"># 查看现有硬盘分区情况</span></span><br><span class="line">$ fdisk -l</span><br><span class="line"><span class="comment"># 目标硬盘分区为</span></span><br><span class="line"><span class="comment"># Device     Boot   Start       End   Sectors   Size Id Type</span></span><br><span class="line"><span class="comment"># /dev/sda1          2048   1050623   1048576   512M  b W95 FAT32</span></span><br><span class="line"><span class="comment"># /dev/sda2       1050624 250068991 249018368 118.8G 83 Linux</span></span><br><span class="line"><span class="comment"># 源硬盘分区为</span></span><br><span class="line"><span class="comment"># Device     Boot   Start       End   Sectors   Size Id Type</span></span><br><span class="line"><span class="comment"># /dev/sdb1  *       2048   1050623   1048576   512M  b W95 FAT32</span></span><br><span class="line"><span class="comment"># /dev/sdb2       1052670 625141759 624089090 297.6G  5 Extended</span></span><br><span class="line"><span class="comment"># /dev/sdb5       1052672 625141759 624089088 297.6G 83 Linux</span></span><br><span class="line"><span class="comment"># 把sdb5复制到sda2</span></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/sdb5 of=/dev/sda2</span><br><span class="line"><span class="comment"># 另外开个终端执行以下命令后。dd命令可以看到dd命令执行过程</span></span><br><span class="line">$ watch -n 5 killall -USR1 dd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/02/26/ubuntu20-001/" data-id="ckqs8au9w000u0umzfdothk1y" data-title="ubuntu20-001" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-centos7-make-install-apache2-4-and-php7-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/26/centos7-make-install-apache2-4-and-php7-2/" class="article-date">
+  <time class="dt-published" datetime="2021-02-26T01:23:20.000Z" itemprop="datePublished">2021-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/26/centos7-make-install-apache2-4-and-php7-2/">centos7 make install apache2.4 and php7.2</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- Table of Contents -->
+   
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装开发环境</span></span><br><span class="line">$ yum groupinstall <span class="string">&quot;Development Tools&quot;</span></span><br><span class="line"><span class="comment"># 安装工具</span></span><br><span class="line">$ yum install wget</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="install-apache-2-4-46"><a href="#install-apache-2-4-46" class="headerlink" title="install apache-2.4.46"></a>install apache-2.4.46</h2><h3 id="install-apr-and-apr-util"><a href="#install-apr-and-apr-util" class="headerlink" title="install  apr and apr-util"></a>install  apr and apr-util</h3><p><a target="_blank" rel="noopener" href="https://apr.apache.org/download.cgi">https://apr.apache.org/download.cgi</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-1.7.0.tar.gz </span><br><span class="line">$ tar -zxvf apr-1.7.0.tar.gz </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="install-apr-and-apr-util-1"><a href="#install-apr-and-apr-util-1" class="headerlink" title="install  apr and apr-util"></a>install  apr and apr-util</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-util-1.6.1.tar.gz</span><br><span class="line">$ tar -zxvf apr-util-1.6.1.tar.gz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="install-apache"><a href="#install-apache" class="headerlink" title="install apache"></a>install apache</h3><p><a target="_blank" rel="noopener" href="https://httpd.apache.org/download.cgi#apache24">https://httpd.apache.org/download.cgi#apache24</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ su</span><br><span class="line">$ mkdir /var/src </span><br><span class="line">$ <span class="built_in">cd</span> /var/src</span><br><span class="line">$ wget https://downloads.apache.org/httpd/httpd-2.4.46.tar.gz</span><br><span class="line">$ tar -zxvf httpd-2.4.46.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> httpd-2.4.46</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/apache \</span><br><span class="line">--sysconfdir=/etc/httpd24 \</span><br><span class="line">--enable-so \</span><br><span class="line">--enable-ssl \</span><br><span class="line">--enable-cgi \</span><br><span class="line">--enable-rewrite \</span><br><span class="line">--with-zlib \</span><br><span class="line">--with-pcre \</span><br><span class="line">--with-apr=/usr/<span class="built_in">local</span>/apr \</span><br><span class="line">--with-apr-util=/usr/<span class="built_in">local</span>/apr-util/ \</span><br><span class="line">--enable-modules=most \</span><br><span class="line">--enable-mpms-shared=all \</span><br><span class="line">--with-mpm=prefork</span><br><span class="line"></span><br><span class="line">$ make &amp;&amp; make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="install-php"><a href="#install-php" class="headerlink" title="install php"></a>install php</h3><p><a target="_blank" rel="noopener" href="https://www.php.net/releases/">https://www.php.net/releases/</a></p>
+<h4 id="install-php5-6"><a href="#install-php5-6" class="headerlink" title="install php5.6"></a>install php5.6</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://www.php.net/distributions/php-5.6.40.tar.gz</span><br><span class="line">$ tar -zxvf php-5.6.40.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> php-5.6.40</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="install-php5-5-6"><a href="#install-php5-5-6" class="headerlink" title="install php5.5.6"></a>install php5.5.6</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://www.php.net/distributions/php-5.5.6.tar.gz</span><br></pre></td></tr></table></figure>
+<h4 id="install-PHP5-4-44"><a href="#install-PHP5-4-44" class="headerlink" title="install PHP5.4.44"></a>install PHP5.4.44</h4><p><a target="_blank" rel="noopener" href="https://www.php.net/distributions/php-5.4.44.tar.gz">https://www.php.net/distributions/php-5.4.44.tar.gz</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.sohophp.app/2021/02/26/centos7-make-install-apache2-4-and-php7-2/" data-id="ckqs8au9n000d0umzfiyhehqm" data-title="centos7 make install apache2.4 and php7.2" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-SELinux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/07/SELinux/" class="article-date">
@@ -112,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="ckl3pqtx5000916lt59s0h6tg" data-title="SELinux" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="ckqs8au9k00090umz214m329o" data-title="SELinux" class="article-share-link">Share</a>
       
       
       
@@ -161,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/" data-id="ckl3pqtwy000116lt9miz3dtq" data-title="CentOS7 自签名证书配置 Apache https (SSL)" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/" data-id="ckqs8au9d00010umz419sg79b" data-title="CentOS7 自签名证书配置 Apache https (SSL)" class="article-share-link">Share</a>
       
       
       
@@ -208,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" data-id="ckl3pqtx2000416ltdnbze6ej" data-title="CentOS7下PHP7.2安装mcrypt" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/" data-id="ckqs8au9h00040umzd2r6ephe" data-title="CentOS7下PHP7.2安装mcrypt" class="article-share-link">Share</a>
       
       
       
@@ -221,420 +614,12 @@
 
 
   
-    <article id="post-CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/" class="article-date">
-  <time class="dt-published" datetime="2021-02-05T16:34:30.000Z" itemprop="datePublished">2021-02-05</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/CentOS/">CentOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="安装CentOS7"><a href="#安装CentOS7" class="headerlink" title="安装CentOS7"></a>安装CentOS7</h2><h3 id="虚拟机安裝-CentOS7"><a href="#虚拟机安裝-CentOS7" class="headerlink" title="虚拟机安裝 CentOS7"></a>虚拟机安裝 CentOS7</h3><h4 id="选择虚拟机-Virtual-Machine"><a href="#选择虚拟机-Virtual-Machine" class="headerlink" title="选择虚拟机 Virtual Machine"></a>选择虚拟机 Virtual Machine</h4><ul>
-<li>Hyper-V </li>
-</ul>
-<p>windows10 自带<br>开机自动运行保留开机前状态<br>好像不能复制</p>
-<ul>
-<li>VMware Workstation</li>
-</ul>
-<p>收费<br>MacOS 下用 VMware Fusion<br>可以用到Hyper-V,那不如直接Hyper-V<br>可以复制 </p>
-<ul>
-<li>VirtualBox</li>
-</ul>
-<p>免费<br>可以用到Hyper-V 那不如直接Hyper-V<br>可以复制</p>
-<ul>
-<li>Windows10 SubSystem</li>
-</ul>
-<p>和windows10 共用端口，IP，WSL2 (实际也是基于SSH) 编辑器方便<br>有各种问题，主要不能用systemctl！<br>一定用到Hyper-V,那不如直接Hyper-V</p>
-<ul>
-<li>Docker<br>麻烦，保证MySQL数据在宿主机不方便<br>迁移复制方便，可以直接部署上线。</li>
-</ul>
-<h3 id="最小安装CentOS7"><a href="#最小安装CentOS7" class="headerlink" title="最小安装CentOS7"></a>最小安装CentOS7</h3><p>以下是用 Hyper-V +　CentOS-7-x86_64-Minimal-2003.iso</p>
-<p>一個root密碼，一個管理員用戶（用于VSCode|PHPStorm 使用ssh|sftp直接编辑项目），<br>（安装gitea加了个git用户，没有sudo权限）</p>
-<p>其它全部 auto</p>
-<h3 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hostnamectl set-hostname <span class="string">&quot;php72.vm&quot;</span></span><br><span class="line">$ cat /etc/hostname</span><br><span class="line">php72.vm</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h3><p> 查看网卡<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr </span><br></pre></td></tr></table></figure><br>
-        
-          <p class="article-more-link">
-            <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/" data-id="ckl3pqtxt002916ltbfnfh3ck" data-title="CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS7/" rel="tag">CentOS7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Httpd/" rel="tag">Httpd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP-FPM/" rel="tag">PHP-FPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP7/" rel="tag">PHP7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP7-2/" rel="tag">PHP7.2</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-CRM-Composer-源管理工具" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" class="article-date">
-  <time class="dt-published" datetime="2021-02-05T12:57:42.000Z" itemprop="datePublished">2021-02-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>►<a class="article-category-link" href="/categories/PHP/Composer/">Composer</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">CRM - Composer 源管理工具</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>以下引用github项目仓库READMD:<br><a target="_blank" rel="noopener" href="https://github.com/slince/composer-registry-manager/edit/master/README-zh_CN.md">https://github.com/slince/composer-registry-manager/edit/master/README-zh_CN.md</a><br>项目仓库网址：<a target="_blank" rel="noopener" href="https://github.com/slince/composer-registry-manager">https://github.com/slince/composer-registry-manager</a></p>
-</blockquote>
-<p>由于composer在国内下载速度非常慢，大家都习惯使用中国镜像，如果正在使用的镜像没有更新或者出现故障你可以使用Composer Registry Manager帮助你轻松地切换到另外一个镜像。<br>默认带了一些镜像,当然你也可以添加新的镜像。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用composer安装，执行下面命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer global require slince/composer-registry-manager</span><br></pre></td></tr></table></figure>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="列出所有可使用的镜像"><a href="#列出所有可使用的镜像" class="headerlink" title="列出所有可使用的镜像"></a>列出所有可使用的镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ composer repo:ls</span><br><span class="line"></span><br><span class="line"> --- ------------- ------------------------------------------------ ------------------------------</span><br><span class="line">      composer      https://packagist.org                            Europe, Canada and Singapore</span><br><span class="line">      aliyun        https://mirrors.aliyun.com/composer              China</span><br><span class="line">      tencent       https://mirrors.cloud.tencent.com/composer       China</span><br><span class="line">  *   huawei        https://mirrors.huaweicloud.com/repository/php   China</span><br><span class="line">      cnpkg         https://php.cnpkg.org                            China</span><br><span class="line">      sjtug         https://packagist.mirrors.sjtug.sjtu.edu.cn      China</span><br><span class="line">      phpcomposer   https://packagist.phpcomposer.com                China</span><br><span class="line">      kkame         https://packagist.kr                             South Korea</span><br><span class="line">      hiraku        https://packagist.jp                             Japan</span><br><span class="line">      webysther     https://packagist.com.br                         Brazil</span><br><span class="line">      solidworx     https://packagist.co.za                          South Africa</span><br><span class="line">      indra         https://packagist.phpindonesia.id                Indonesia</span><br><span class="line">      varun         https://packagist.in                             India</span><br><span class="line"> --- ------------- ------------------------------------------------ ------------------------------</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-id="ckl3pqtwu000016lt0ql1ho29" data-title="CRM - Composer 源管理工具" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CRM/" rel="tag">CRM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-ModSecurity" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/02/ModSecurity/" class="article-date">
-  <time class="dt-published" datetime="2021-02-02T11:52:06.000Z" itemprop="datePublished">2021-02-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/CentOS/">CentOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/02/ModSecurity/">ModSecurity</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="安装-ModSecurity"><a href="#安装-ModSecurity" class="headerlink" title="安装 ModSecurity"></a>安装 ModSecurity</h2><p><a target="_blank" rel="noopener" href="https://www.modsecurity.org/">https://www.modsecurity.org/</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装mod_security</span></span><br><span class="line">$ yum install mod_security</span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 重启httpd</span></span><br><span class="line">$ sudo systemctl restart httpd</span><br></pre></td></tr></table></figure>
-<h2 id="安装-CRS-CoreRuleSet-规则集"><a href="#安装-CRS-CoreRuleSet-规则集" class="headerlink" title="安装 CRS (CoreRuleSet) 规则集"></a>安装 CRS (CoreRuleSet) 规则集</h2><p><a target="_blank" rel="noopener" href="https://coreruleset.org/installation/">https://coreruleset.org/installation/</a>  </p>
-        
-          <p class="article-more-link">
-            <a href="/2021/02/02/ModSecurity/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/02/ModSecurity/" data-id="ckl3pqtx4000616lt9v8o3x2q" data-title="ModSecurity" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CRS/" rel="tag">CRS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Httpd/" rel="tag">Httpd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ModSecurity/" rel="tag">ModSecurity</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Linux-常用命令备用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2021-01-31T01:14:10.000Z" itemprop="datePublished">2021-01-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/">Linux 常用命令备用</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nltp</span><br></pre></td></tr></table></figure>
-<p>查看当前监听端口，例如在安装了apache(httpd)和mod_ssl后，测试https不可用。<br>使用netstat -nltp 查看有apache在监听80,但没有443.(重新安装mod_ssl后正常).</p>
-<hr>
-<p><strong><em>持续更新….</em></strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/31/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%87%E7%94%A8/" data-id="ckl3pqtx3000516lt4tolhw6k" data-title="Linux 常用命令备用" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Visual-Studio-Code-PHP需要的插件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/" class="article-date">
-  <time class="dt-published" datetime="2021-01-29T16:46:32.000Z" itemprop="datePublished">2021-01-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Visual-Sudio-Code/">Visual Sudio Code</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/">Visual Studio Code PHP需要的插件</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>以下插件按名称顺序排列</p>
-<h2 id="Apache-Conf"><a href="#Apache-Conf" class="headerlink" title="Apache Conf"></a>Apache Conf</h2><ul>
-<li><p>引用介绍<br>Syntax highlighing for Apache conf files in Visual Studio Code. Ported from ApacheConf.tmLanguage.</p>
-</li>
-<li><p>使用体验<br> Apache的conf语法高亮，常用在 .htaccess </p>
-<img src="/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20210210224932.png" class="" title="Apache Conf"> 
-
-</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/29/Visual-Studio-Code-PHP%E9%9C%80%E8%A6%81%E7%9A%84%E6%8F%92%E4%BB%B6/" data-id="ckl3pqtx6000a16lt1lwidk98" data-title="Visual Studio Code PHP需要的插件" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Visual-Sudio-Code/" rel="tag">Visual Sudio Code</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-hexo图片插件" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" class="article-date">
-  <time class="dt-published" datetime="2021-01-24T12:18:32.000Z" itemprop="datePublished">2021-01-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/">hexo图片插件</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>卸载旧的图片插件（如果有） 例如 <code>hexo-asset-image</code>或者<code>hexo-simple-image</code> ，这两个图片网址都有错误 </li>
-<li>修改_config.yml 的 <code>post_asset_folder: true</code></li>
-<li><code>hexo new post &quot;test&quot;</code> 试一个会自动生成source/_posts/test文件夹用来存放图片文件</li>
-<li><code>npm install hexo-image-link --save</code> 安装插件</li>
-<li>hexo server –debug 启动server</li>
-</ol>
-<img src="/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/logo20210123204140.png" class="" title="logo">
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/24/hexo%E5%9B%BE%E7%89%87%E6%8F%92%E4%BB%B6/" data-id="ckl3pqtx9000e16lt7w83ew1d" data-title="hexo图片插件" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Image/" rel="tag">Image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/01/21/hexo/" class="article-date">
-  <time class="dt-published" datetime="2021-01-21T15:06:59.000Z" itemprop="datePublished">2021-01-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/01/21/hexo/">什么是 Hexo？</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- Table of Contents -->
-   
-
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 是一个快速、简洁且高效的博客框架。Hexo 使用 <a target="_blank" rel="noopener" href="https://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/01/21/hexo/" data-id="ckl3pqtx8000d16ltbcsx3kc4" data-title="什么是 Hexo？" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -644,7 +629,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/Composer/">Composer</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Visual-Sudio-Code/">Visual Sudio Code</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/Composer/">Composer</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Visual-Sudio-Code/">Visual Sudio Code</a></li></ul>
     </div>
   </div>
 
@@ -654,7 +639,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRM/" rel="tag">CRM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRS/" rel="tag">CRS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS7/" rel="tag">CentOS7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Httpd/" rel="tag">Httpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/" rel="tag">Https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Image/" rel="tag">Image</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ModSecurity/" rel="tag">ModSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP-FPM/" rel="tag">PHP-FPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7/" rel="tag">PHP7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7-2/" rel="tag">PHP7.2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Sudio-Code/" rel="tag">Visual Sudio Code</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRM/" rel="tag">CRM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRS/" rel="tag">CRS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS7/" rel="tag">CentOS7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Httpd/" rel="tag">Httpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Https/" rel="tag">Https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ModSecurity/" rel="tag">ModSecurity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP-FPM/" rel="tag">PHP-FPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7/" rel="tag">PHP7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP7-2/" rel="tag">PHP7.2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/" rel="tag">SELinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/" rel="tag">SSL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Sudio-Code/" rel="tag">Visual Sudio Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
     </div>
   </div>
 
@@ -664,7 +649,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Apache/" style="font-size: 16.67px;">Apache</a> <a href="/tags/CRM/" style="font-size: 10px;">CRM</a> <a href="/tags/CRS/" style="font-size: 10px;">CRS</a> <a href="/tags/CentOS/" style="font-size: 20px;">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 16.67px;">CentOS7</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Httpd/" style="font-size: 13.33px;">Httpd</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/Image/" style="font-size: 10px;">Image</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ModSecurity/" style="font-size: 10px;">ModSecurity</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHP-FPM/" style="font-size: 10px;">PHP-FPM</a> <a href="/tags/PHP7/" style="font-size: 10px;">PHP7</a> <a href="/tags/PHP7-2/" style="font-size: 10px;">PHP7.2</a> <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/Visual-Sudio-Code/" style="font-size: 10px;">Visual Sudio Code</a>
+      <a href="/tags/Apache/" style="font-size: 16.67px;">Apache</a> <a href="/tags/CRM/" style="font-size: 10px;">CRM</a> <a href="/tags/CRS/" style="font-size: 10px;">CRS</a> <a href="/tags/CentOS/" style="font-size: 20px;">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 16.67px;">CentOS7</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Httpd/" style="font-size: 13.33px;">Httpd</a> <a href="/tags/Https/" style="font-size: 10px;">Https</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ModSecurity/" style="font-size: 10px;">ModSecurity</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/PHP/" style="font-size: 16.67px;">PHP</a> <a href="/tags/PHP-FPM/" style="font-size: 10px;">PHP-FPM</a> <a href="/tags/PHP7/" style="font-size: 10px;">PHP7</a> <a href="/tags/PHP7-2/" style="font-size: 10px;">PHP7.2</a> <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/SSL/" style="font-size: 10px;">SSL</a> <a href="/tags/Visual-Sudio-Code/" style="font-size: 10px;">Visual Sudio Code</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
     </div>
   </div>
 
@@ -673,7 +658,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
     </div>
   </div>
 
@@ -686,23 +671,23 @@
       <ul>
         
           <li>
-            <a href="/2021/02/07/SELinux/">SELinux</a>
+            <a href="/2021/07/06/it-is-okay/">it&#39;is okay</a>
           </li>
         
           <li>
-            <a href="/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/">CentOS7 自签名证书配置 Apache https (SSL)</a>
+            <a href="/2021/05/21/docker-ubuntu-postfix-mysql/">ubuntu下安装postfix+mysql+dovecot</a>
           </li>
         
           <li>
-            <a href="/2021/02/05/CentOS7%E4%B8%8BPHP7-2%E5%AE%89%E8%A3%85mcrypt/">CentOS7下PHP7.2安装mcrypt</a>
+            <a href="/2021/05/03/ubuntu20-install-php7-2/">ubuntu20 install php7.2</a>
           </li>
         
           <li>
-            <a href="/2021/02/05/CentOS7-Apache-Httpd-2-4-PHP7-2-MySQL-MariaDB/">CentOS7+Apache(Httpd)2.4+PHP7.2+MySQL5.6</a>
+            <a href="/2021/03/03/docker/">docker</a>
           </li>
         
           <li>
-            <a href="/2021/02/05/CRM-Composer-%E6%BA%90%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">CRM - Composer 源管理工具</a>
+            <a href="/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/">docker 减小体积生成新的镜像</a>
           </li>
         
       </ul>

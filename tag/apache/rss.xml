@@ -22,10 +22,13 @@
         <category>Httpd</category>
         <category>SELinux</category>
         <category>Visual Sudio Code</category>
+        <category>docker</category>
+        <category>Docker</category>
         <category>Hexo</category>
         <category>Markdown</category>
-        <category>Image</category>
-        <category>Javascript</category>
+        <category>php</category>
+        <category>ubuntu</category>
+        <category>linux</category>
         <category>PHP7</category>
         <category>PHP7.2</category>
         <category>MySQL</category>
