@@ -12,33 +12,8 @@ toc: true
 
 #### 选择虚拟机 Virtual Machine
 
-+ Hyper-V 
-
-windows10 自带
-开机自动运行保留开机前状态 
-好像不能复制
-+ VMware Workstation
-
-收费
-MacOS 下用 VMware Fusion
-可以用到Hyper-V,那不如直接Hyper-V
-可以复制 
-+ VirtualBox
-
-免费
-可以用到Hyper-V 那不如直接Hyper-V
-可以复制
-+ Windows10 SubSystem
-
-和windows10 共用端口，IP，WSL2 (实际也是基于SSH) 编辑器方便
-有各种问题，主要不能用systemctl！
-一定用到Hyper-V,那不如直接Hyper-V
-
-+ Docker
-麻烦，保证MySQL数据在宿主机不方便 
-迁移复制方便，可以直接部署上线。
-
 ### 最小安装CentOS7
+
 以下是用 Hyper-V +　CentOS-7-x86_64-Minimal-2003.iso
 
 一個root密碼，一個管理員用戶（用于VSCode|PHPStorm 使用ssh|sftp直接编辑项目），
@@ -46,7 +21,7 @@ MacOS 下用 VMware Fusion
 
 其它全部 auto
 
-### 修改主机名 
+### 修改主机名
 
 ```Bash
 $ hostnamectl set-hostname "php72.vm"
@@ -54,11 +29,11 @@ $ cat /etc/hostname
 php72.vm
 ```
 
+### 配置网络
 
-### 配置网络 
- 
- 查看网卡 
- ```Bash 
+ 查看网卡
+
+ ```Bash
    ip addr 
  ```
  <!--more-->
@@ -149,7 +124,6 @@ $ sudo crontab -l
 $ date -R
 > Sat, 06 Feb 2021 12:44:09 +0800
 ```
- 
 
 安装 strace
 
@@ -174,6 +148,7 @@ Policy MLS status:              enabled
 Policy deny_unknown status:     allowed
 Max kernel policy version:      31 
 ```
+
 查看firewalld状态
 
 ```Bash
@@ -207,43 +182,45 @@ public (active)
   source-ports: 
   icmp-blocks: 
   rich rules: 
-``` 
+```
 
 更新系统
 
 ```Bash
-$ sudo yum update
+sudo yum update
 ```
-
 
 ## 安装Apache(Httpd)
 
+```Bash
+sudo yum install httpd  
+```
+
+开机启动httpd
 
 ```Bash
-$ sudo yum install httpd  
-```
-开机启动httpd
-```Bash
-$ sudo systemctl enable httpd
+sudo systemctl enable httpd
 ```
 
 现在启动httpd
 
 ```Bash
-$ sudo systemctl start httpd
+sudo systemctl start httpd
 
 ```
 
 查看netstat命令属于哪个包
 
 ```Bash
-$ yum whatprovides netstat
+yum whatprovides netstat
 ```
 
 安装net-tools
+
 ```Bash
-$ sudo yum install net-tools -y
+sudo yum install net-tools -y
 ```
+
 查看端口监听 （80/tcp 被 httpd 监听，说明httpd已经启动）
 netstat 参数
 -t (tcp) 仅显示tcp相关选项
@@ -256,7 +233,6 @@ netstat 参数
 $ sudo netstat -tnlp | grep 80
 tcp6       0      0 :::80      :::*     LISTEN      21835/httpd  
 ```
-
 
 查看firewalld是否支持http服务
 
@@ -275,13 +251,15 @@ $ sudo firewall-cmd --zone=public --add-service=http --permanent
 # 或者
 $ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 ```
+
 重新加载firewalld配置使设定生效
 
 ```Bash
-$ sudo firewall-cmd --reload
+sudo firewall-cmd --reload
 ```
 
 修改/var/www/html所属用户
+
 ```
 $ sudo chown -R jason:jason /var/www/html
 $ ll /var/www/
@@ -290,18 +268,21 @@ total 0
 drwxr-xr-x. 2 root  root   6 Nov 16 11:19 cgi-bin
 drwxr-xr-x. 2 jason jason 24 Feb  5 07:25 html
 ```
+
 安装VIM
 
 ```Bash
-$ sudo yum install vim -y
+sudo yum install vim -y
 ```
 
 新建并编辑测试网页
 
 ```Bash
-$ vim /var/www/html/index.html
+vim /var/www/html/index.html
 ```
+
 内容
+
 ```Html
 <html>
    <head>
@@ -313,9 +294,11 @@ $ vim /var/www/html/index.html
    <body>
 </html>
 ```
+
 测试静态页，或者浏览器打开IP网址
+
 ```Bash
-$ curl http://ip
+curl http://ip
 ```
 
 ---
@@ -323,12 +306,14 @@ $ curl http://ip
 ## 安装 MySQL5.6
   
 ### 安装MySQL5.6
+
 ```Bash
 # CentOS7默认是mariadb,如果已经安装，卸载mariadb
 $ yum remove mariadb mariadb-server 
 ```
+
 安装MySQL5.6要用到的YUM源网址
-https://dev.mysql.com/downloads/repo/yum/
+<https://dev.mysql.com/downloads/repo/yum/>
 
 ```Bash
 # 下载 Red Hat Enterprise Linux 7
@@ -344,20 +329,23 @@ $ systemctl start mysqld
 $ systemctl enable mysqld
 ```
 
-使用yum-config-manager 关闭mysql80-community 开启 mysql56-community 
+使用yum-config-manager 关闭mysql80-community 开启 mysql56-community
 也可以直接编辑/etc/yum.repos.d/ 下的配置文件
 (非必要) 怕以后忘了更新成mysql8
 
 ```Bash
-$ yum whatprovides yum-config-mananger
-$ yum install yum-utils
-$ yum repolist all | grep mysql
-$ yum-config-manager --disable  mysql80-community
-$ yum-config-manager --enable mysql56-community
-$ yum repolist all | grep -E 'mysql.*enabled'
+yum whatprovides yum-config-mananger
+yum install yum-utils
+yum repolist all | grep mysql
+yum-config-manager --disable  mysql80-community
+yum-config-manager --enable mysql56-community
+yum repolist all | grep -E 'mysql.*enabled'
 ```
+
 ### 初始化
+
 首次安装设定root密码,删除匿名用户，删除test数据库，
+
 ```Bash
 $ sudo mysql_secure_installation
 # 输入当前root密码，预设密码为空
@@ -379,7 +367,8 @@ Reload privilege tables now? [Y/n] y
 
 ```
 
-### 连接 MySQL ,添加用户。
+### 连接 MySQL ,添加用户
+
 方便测试用%,正式使用localhost
 
 ```
@@ -398,15 +387,16 @@ MySQL> quit;
 
 ---
 
-## 安装PHP 7.2 
+## 安装PHP 7.2
 
 查看YUM安装PHP版本
 
 ```Bash
-$ sudo yum info php
+sudo yum info php
 ```
 
 CentOS 7 YUM 默认安装php是5.4,所以安装YUM源用来安装PHP7.2
+
 ```Bash
 $ sudo yum install epel-release
 $ sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
@@ -432,18 +422,21 @@ PHP 7.2.34 (fpm-fcgi) (built: Oct  1 2020 13:40:44)
 ```
 
 新建并编辑php测试文件
+
 ```Bash
-$ rm -f /var/www/html/index.html
-$ vim /var/www/html/index.php 
+rm -f /var/www/html/index.html
+vim /var/www/html/index.php 
 ```
+
 内容
 
 ```PHP
 <?php phpinfo(); ?>
 ```
 
-测试 http://ip/index.php
+测试 <http://ip/index.php>
 或者:
+
 ```Bash
 $ curl -I http://localhost/index.php
 HTTP/1.1 200 OK
@@ -457,7 +450,7 @@ Content-Type: text/html; charset=UTF-8
 
 ### php-fpm
 
-https://cwiki.apache.org/confluence/display/HTTPD/PHP-FPM
+<https://cwiki.apache.org/confluence/display/HTTPD/PHP-FPM>
 
 ```Bash
 # 开机启动php-fpm
@@ -475,6 +468,7 @@ $ sudo netstat -nltp | grep 9000
 tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN      23148/php-fpm: mast 
 
 ```
+
 所有.php使用php-fpm代理
 
 ```Bash
@@ -486,6 +480,7 @@ $ sudo vim /etc/httpd/conf.d/php-fpm.conf
 ```
 
 重启apache测试
+
 ```Bash
 # 配置是否有錯
 $ apachectl configtest
@@ -497,6 +492,7 @@ $ curl http://localhost/index.php | grep php-fpm
 ```
 
 ### 使用 .user.ini
+
 ```Bash
 $ var /etc/php.ini
 user_ini.filename = ".user.ini"
@@ -507,16 +503,18 @@ $ vim .user.ini
 > upload_max_filesize="20M"
 ```
 
- ### 创建VirtualHost，使用自定域名/主机名，开启rewrite,.htaccess
+### 创建VirtualHost，使用自定域名/主机名，开启rewrite,.htaccess
 
 修改/etc/hosts加入自定域名
-```Bash 
+
+```Bash
 $ sudo vim /etc/hosts
 127.0.0.1 php72.vm  localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1       php72.vm  localhost localhost.localdomain localhost6 localhost6.localdomain
 ```
 
 测试域名
+
 ```Bash
 $ ping php72.vm
 PING php72.vm (127.0.0.1) 56(84) bytes of data.
@@ -524,6 +522,7 @@ PING php72.vm (127.0.0.1) 56(84) bytes of data.
 ```
 
 新建VirtualHost
+
 ```Bash
 $ sudo vim /etc/httpd/conf.d/vhosts.conf
 
@@ -533,6 +532,7 @@ $ sudo vim /etc/httpd/conf.d/vhosts.conf
   ServerAlias php72.vm 
 </VirtualHost>
 ```
+
 修改httpd.conf开启.htaccess
 
 ```Bash
@@ -548,16 +548,19 @@ $ sudo vim /etc/httpd/conf/httpd.conf
 ```
 
 重启httpd
-```Bash
-$ sudo systemctl restart httpd
-```
-测试http://php72.vm/index.php 或者：
 
 ```Bash
-$ curl http://php72.vm | grep php-fpm
+sudo systemctl restart httpd
+```
+
+测试<http://php72.vm/index.php> 或者：
+
+```Bash
+curl http://php72.vm | grep php-fpm
 ```
 
 测试 PUT METHOD
+
 ```Bash
 $ curl -X PUT -I  http://localhost
 HTTP/1.1 200 OK
@@ -595,10 +598,10 @@ $ composer --version
 
 ---
 
-##  安装 ModSecurity
+## 安装 ModSecurity
 
 ### 安装 ModSecurity
-https://www.modsecurity.org/
+<https://www.modsecurity.org/>
 
 ```Bash
 # 安装mod_security
@@ -607,10 +610,10 @@ $ yum install mod_security
 # 重启httpd
 $ sudo systemctl restart httpd
 ```
-###  安装 CRS (CoreRuleSet) 规则集
 
-https://coreruleset.org/installation/  
+### 安装 CRS (CoreRuleSet) 规则集
 
+<https://coreruleset.org/installation/>  
 
 <!--more-->
 ```Bash
@@ -646,6 +649,7 @@ curl -X PUT -I http://localhost
 > HTTP/1.1 403 Forbidden
 
 ```
+
 ### 开放PUT,DELETE 方法
 
 ```Bash
@@ -715,18 +719,18 @@ $ systemctl restart httpd
 ```
 
 ### mod_evasive DDos 防火墙 for apache
- 
-一定要有DDOS防火墙！！！
+
+一定要有DDOS防火墙
 不然就等于光着身子被乱箭穿身，
 总能被刺中一次！
-最好是有硬件防火墙! 
+最好是有硬件防火墙!
 ===
 
 参考网址
-https://www.digitalocean.com/community/tutorials/how-to-protect-against-dos-and-ddos-with-mod_evasive-for-apache-on-centos-7
+<https://www.digitalocean.com/community/tutorials/how-to-protect-against-dos-and-ddos-with-mod_evasive-for-apache-on-centos-7>
 
 epel for CentOS7 网址
-https://centos.pkgs.org/7/epel-x86_64/epel-release-7-13.noarch.rpm.html
+<https://centos.pkgs.org/7/epel-x86_64/epel-release-7-13.noarch.rpm.html>
 
 ```Bash
 # 查看是否安装了epel 
@@ -738,6 +742,7 @@ $ yum localinstall epel-release-7-13.noarch.rpm
 $ yum install yum-plugin-protectbase mod_evasive
 
 ```
+
 ```Bash
 $ cat /etc/httpd/conf.d/mod_evasive.conf | grep -Ev '^$|#'
 
@@ -813,7 +818,6 @@ httpd_graceful_shutdown --> on
 
 ### Sendmail
 
-
 #### mail: command not found
 
 ```Bash
@@ -855,6 +859,7 @@ public (active)
 
 至此,
 CentOS7
+
 + Apache 2.4
 + PHP-FPM 7.2
 + MySQL 5.6

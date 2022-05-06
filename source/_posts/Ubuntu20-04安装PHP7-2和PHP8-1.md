@@ -1,7 +1,7 @@
 ---
 title: WSL-Ubuntu20.04 安装 Apache2.4 + MySQL8.0 + PHP7.2 和 PHP8.1 ,composer,git 开发环境
 date: 2022-04-30 11:55:58
-tags:
+tags: [WSL,Ubuntu,PHP,MySQL]
 ---
 
 ### 安装 Apache 2.4
@@ -9,7 +9,7 @@ tags:
 ```bash
 $ sudo apt update
 $ sudo apt upgrade
-$ sudo apt install vim net-tools curl wget
+$ sudo apt install vim net-tools unzip curl wget
 # 安装 Apache
 $ sudo apt install apache2
 # 修改 /etc/apache2/apache.conf
@@ -83,7 +83,9 @@ php7.2-mbstring \
 php7.2-mcrypt \
 php7.2-sqlite3 \
 php7.2-xml \
-php7.2-zip
+php7.2-zip \
+php7.2-mysqli \
+php7.2-gd
 
 # 在Apache中启用php7.2-fpm
 $ a2enmod proxy_fcgi setenvif
@@ -108,7 +110,8 @@ php8.1-mbstring \
 php8.1-sqlite3 \
 php8.1-xml \
 php8.1-yaml \
-php8.1-zip 
+php8.1-zip \
+php8.1-mysql
 
 # 启用 a2enconf php8.1-fpm,不是必要的
 $ sudo a2enconf php8.1-fpm
@@ -143,14 +146,21 @@ $ netstat -a
 ### 安装 composer
 
 ```bash
-curl  https://getcomposer.org/installer -o composer-setup.php
-php8.1 composer-setup.php
-chmod +x composer.phar
-sudo mv composer.phar /usr/local/bin/composer81
-php7.2 composer-setup.php
-chmod +x composer.phar
-sudo mv composer.phar /usr/local/bin/composer
+$ curl  https://getcomposer.org/installer -o composer-setup.php
+$ php composer-setup.php
+$ chmod +x composer.phar
+$ sudo mv composer.phar /usr/local/bin/composer
+# 切換 php-cli 版本
 
+
+# 切换到php7.2
+$ sudo update-alternatives --set php /usr/bin/php7.2
+# 或者
+$ sudo ln -sf /usr/bin/php7.2 /etc/alternatives/php
+# 切换到php8.1
+$ sudo update-alternatives --set php /usr/bin/php8.1
+# 或者
+$ sudo ln -sf /usr/bin/php8.1 /etc/alternatives/php
 ```
 
 ### 安装 GIT
@@ -163,4 +173,76 @@ sudo apt install git
 
 ```bash
 sudo apt install npm
+```
+
+### 开启 SSL
+
+```bash
+# 开启SSL
+$ sudo a2enmod ssl
+$ sudo a2ensite default-ssl
+$ sudo /etc/init.d/apache2 restart
+# 本地自签证书
+# 使用 mkcert : https://github.com/FiloSottile/mkcert
+PowerShell> mkcert -install locahost
+# 会生成 localhost.pem和localhost-key.pem
+# 
+$ sudo vim /etc/apache2/sites-available/default-ssl.conf
+# 修改内容，这里用的是windows用户名下文件位置，也可以复制到 wsl 下
+#SSLCertificateFile     /etc/ssl/certs/ssl-cert-snakeoil.pem
+#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+SSLCertificateFile /mnt/c/Users/用户名/localhost.pem
+SSLCertificateKeyFile /mnt/c/Users/用户名/localhost-key.pem
+
+```
+
+### 常见问题
+
+1. PHP在使用chmod时出现 chmod(): Operation not permitte
+
+```bash
+#/etc/wsl.conf
+#同时解决/mnt/c,d...等默认0777权限问题,在/etc/wsl.conf（如果没有就新建）编辑如下内容:
+[automount]
+enabled = true
+root = /mnt/
+options = "metadata,umask=22,fmask=111"
+mountFsTab = true
+[filesystem]
+umask = 022
+# 关闭WSL再重启
+# Windows PowerShell> wsl --shutdown. 
+# 不出意外就正常了。
+# 如果不能解决 sudo chown www-data:www-data uploads 临时解决出错
+```
+
+2. 启动服务
+
+```bash
+$ sudo vim /usr/local/bin/startup
+#----内容-----
+/etc/init.d/mysql start
+/etc/init.d/php8.1-fpm start
+/etc/init.d/php7.2-fpm start
+/etc/init.d/apache2 start
+#---------  
+$ sudo chmod a+x /usr/local/bin/startup
+# 以后启动用 sudo startup启动
+# 或者在windows下 wsl -d Ubuntu -u root 
+```
+
+3. SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+```bash
+mysql> ALTER USER '用户名'@'localhost' IDENTIFIED WITH mysql_native_password BY '密码';
+```
+
+4. Could not instantiate mail function.
+
+> 安装 sendmail或者postfix
+
+```bash
+$ sudo apt install sendmail
+# 或者
+$ sudo apt install postfix
 ```
