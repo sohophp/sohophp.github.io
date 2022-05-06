@@ -12,16 +12,23 @@
         <category>CRM</category>
         <category>CentOS</category>
         <category>CentOS7</category>
-        <category>SSL</category>
         <category>Apache</category>
+        <category>Httpd</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
+        <category>SSL</category>
         <category>Https</category>
         <category>Linux</category>
         <category>Centos</category>
         <category>ModSecurity</category>
         <category>CRS</category>
-        <category>Httpd</category>
         <category>SELinux</category>
-        <category>Visual Sudio Code</category>
+        <category>Ubuntu,WSL</category>
+        <category>WSL</category>
+        <category>Ubuntu</category>
         <category>docker</category>
         <category>Docker</category>
         <category>Hexo</category>
@@ -29,22 +36,17 @@
         <category>php</category>
         <category>ubuntu</category>
         <category>linux</category>
-        <category>PHP7</category>
-        <category>PHP7.2</category>
-        <category>MySQL</category>
-        <category>MariaDB</category>
-        <category>PHP-FPM</category>
         <item>
             <guid isPermalink="true">https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/</guid>
             <title>CentOS7 自签名证书配置 Apache https (SSL)</title>
             <link>https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/</link>
             <category>CentOS</category>
             <category>CentOS7</category>
-            <category>SSL</category>
             <category>Apache</category>
+            <category>SSL</category>
             <category>Https</category>
             <pubDate>Sat, 06 Feb 2021 18:38:00 +0000</pubDate>
-            <description><![CDATA[ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ su&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ yum install mod_ssl openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ cp openssl.cnf openssl.cnf.bak&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+            <description><![CDATA[ &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ su&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ yum install mod_ssl openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ &lt;span class=&#34;built_in&#34;&gt;cp&lt;/span&gt; openssl.cnf openssl.cnf.bak&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
         </item>
     </channel>
 </rss>

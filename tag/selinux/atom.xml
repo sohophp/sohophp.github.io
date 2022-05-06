@@ -9,16 +9,23 @@
     <category term="CRM" />
     <category term="CentOS" />
     <category term="CentOS7" />
-    <category term="SSL" />
     <category term="Apache" />
+    <category term="Httpd" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
+    <category term="SSL" />
     <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />
     <category term="CRS" />
-    <category term="Httpd" />
     <category term="SELinux" />
-    <category term="Visual Sudio Code" />
+    <category term="Ubuntu,WSL" />
+    <category term="WSL" />
+    <category term="Ubuntu" />
     <category term="docker" />
     <category term="Docker" />
     <category term="Hexo" />
@@ -26,11 +33,6 @@
     <category term="php" />
     <category term="ubuntu" />
     <category term="linux" />
-    <category term="PHP7" />
-    <category term="PHP7.2" />
-    <category term="MySQL" />
-    <category term="MariaDB" />
-    <category term="PHP-FPM" />
     <entry>
         <id>https://www.sohophp.app/2021/02/07/SELinux/</id>
         <title>SELinux</title>
@@ -38,6 +40,7 @@
         <content type="html">&lt;h3 id=&#34;SELinux的策略与规则管理相关命令&#34;&gt;&lt;a href=&#34;#SELinux的策略与规则管理相关命令&#34; class=&#34;headerlink&#34; title=&#34;SELinux的策略与规则管理相关命令&#34;&gt;&lt;/a&gt;SELinux的策略与规则管理相关命令&lt;/h3&gt;&lt;h4 id=&#34;getsebool&#34;&gt;&lt;a href=&#34;#getsebool&#34; class=&#34;headerlink&#34; title=&#34;getsebool&#34;&gt;&lt;/a&gt;getsebool&lt;/h4&gt;&lt;p&gt;getsebool命令是用来查询SELinux策略内各项规则的布尔值。&lt;br&gt;SELinux的策略与规则管理相关命令：&lt;br&gt;seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。&lt;/p&gt;
 &lt;h5 id=&#34;选项&#34;&gt;&lt;a href=&#34;#选项&#34; class=&#34;headerlink&#34; title=&#34;选项&#34;&gt;&lt;/a&gt;选项&lt;/h5&gt;&lt;p&gt;-a：列出目前系统上面的所有布尔值条款设置为开启或关闭值。&lt;/p&gt;
 &lt;h5 id=&#34;实例&#34;&gt;&lt;a href=&#34;#实例&#34; class=&#34;headerlink&#34; title=&#34;实例&#34;&gt;&lt;/a&gt;实例&lt;/h5&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看httpd相关设定&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ getsebool -a | grep httpd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 </content>
         <category term="CentOS" />
         <category term="CentOS7" />

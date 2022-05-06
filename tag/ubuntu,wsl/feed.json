@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "SOHOPHP • All posts by \"ubuntu,wsl\" tag",
+    "description": "",
+    "home_page_url": "https://www.sohophp.app",
+    "items": [
+        {
+            "id": "https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/",
+            "url": "https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/",
+            "title": "Ubuntu (WSL) chmod(): Operation not permitted",
+            "date_published": "2022-04-29T14:43:33.000Z",
+            "content_html": "<p>Ubuntu20.04 (WSL) 在PHP中chmod时出现:<br><code>chmod(): Operation not permitted </code></p>\n<p>或者中文</p>\n<p><code>chmod(): 此項操作並不被允許</code></p>\n<p>解决办法：</p>\n<figure class=\"highlight plaintext\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br></pre></td><td class=\"code\"><pre><span class=\"line\"># 如果出现 umount: /mnt/c: target is busy.退出已打开的编辑器和目录浏览，并执行: cd </span><br><span class=\"line\">$ cd</span><br><span class=\"line\">$ sudo umount /mnt/c</span><br><span class=\"line\">$ sudo mount -t drvfs C: /mnt/c -o metadata</span><br><span class=\"line\"></span><br></pre></td></tr></table></figure>",
+            "tags": [
+                "Ubuntu,WSL"
+            ]
+        }
+    ]
+}

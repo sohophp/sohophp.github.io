@@ -9,12 +9,12 @@
             "url": "https://www.sohophp.app/2021/02/06/CentOS7-%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE-Apache-https-SSL/",
             "title": "CentOS7 自签名证书配置 Apache https (SSL)",
             "date_published": "2021-02-06T18:38:00.000Z",
-            "content_html": "<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">$ su</span><br><span class=\"line\">$ yum install mod_ssl openssl openssl-devel</span><br><span class=\"line\">$ cp openssl.cnf openssl.cnf.bak</span><br><span class=\"line\"></span><br></pre></td></tr></table></figure>",
+            "content_html": "<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">$ su</span><br><span class=\"line\">$ yum install mod_ssl openssl openssl-devel</span><br><span class=\"line\">$ <span class=\"built_in\">cp</span> openssl.cnf openssl.cnf.bak</span><br><span class=\"line\"></span><br></pre></td></tr></table></figure>",
             "tags": [
                 "CentOS",
                 "CentOS7",
-                "SSL",
                 "Apache",
+                "SSL",
                 "Https"
             ]
         }

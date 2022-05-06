@@ -12,16 +12,23 @@
         <category>CRM</category>
         <category>CentOS</category>
         <category>CentOS7</category>
-        <category>SSL</category>
         <category>Apache</category>
+        <category>Httpd</category>
+        <category>PHP7</category>
+        <category>PHP7.2</category>
+        <category>MySQL</category>
+        <category>MariaDB</category>
+        <category>PHP-FPM</category>
+        <category>SSL</category>
         <category>Https</category>
         <category>Linux</category>
         <category>Centos</category>
         <category>ModSecurity</category>
         <category>CRS</category>
-        <category>Httpd</category>
         <category>SELinux</category>
-        <category>Visual Sudio Code</category>
+        <category>Ubuntu,WSL</category>
+        <category>WSL</category>
+        <category>Ubuntu</category>
         <category>docker</category>
         <category>Docker</category>
         <category>Hexo</category>
@@ -29,11 +36,6 @@
         <category>php</category>
         <category>ubuntu</category>
         <category>linux</category>
-        <category>PHP7</category>
-        <category>PHP7.2</category>
-        <category>MySQL</category>
-        <category>MariaDB</category>
-        <category>PHP-FPM</category>
         <item>
             <guid isPermalink="true">https://www.sohophp.app/2021/01/21/hexo/</guid>
             <title>什么是 Hexo？</title>

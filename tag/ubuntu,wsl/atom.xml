@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.sohophp.app</id>
+    <title>SOHOPHP • Posts by &#34;ubuntu,wsl&#34; tag</title>
+    <link href="https://www.sohophp.app" />
+    <updated>2022-04-29T14:43:33.000Z</updated>
+    <category term="Composer" />
+    <category term="PHP" />
+    <category term="CRM" />
+    <category term="CentOS" />
+    <category term="CentOS7" />
+    <category term="Apache" />
+    <category term="Httpd" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
+    <category term="SSL" />
+    <category term="Https" />
+    <category term="Linux" />
+    <category term="Centos" />
+    <category term="ModSecurity" />
+    <category term="CRS" />
+    <category term="SELinux" />
+    <category term="Ubuntu,WSL" />
+    <category term="WSL" />
+    <category term="Ubuntu" />
+    <category term="docker" />
+    <category term="Docker" />
+    <category term="Hexo" />
+    <category term="Markdown" />
+    <category term="php" />
+    <category term="ubuntu" />
+    <category term="linux" />
+    <entry>
+        <id>https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/</id>
+        <title>Ubuntu (WSL) chmod(): Operation not permitted</title>
+        <link rel="alternate" href="https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/"/>
+        <content type="html">&lt;p&gt;Ubuntu20.04 (WSL) 在PHP中chmod时出现:&lt;br&gt;&lt;code&gt;chmod(): Operation not permitted &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;或者中文&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;chmod(): 此項操作並不被允許&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# 如果出现 umount: /mnt/c: target is busy.退出已打开的编辑器和目录浏览，并执行: cd &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ cd&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo umount /mnt/c&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ sudo mount -t drvfs C: /mnt/c -o metadata&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+        <category term="Ubuntu,WSL" />
+        <updated>2022-04-29T14:43:33.000Z</updated>
+    </entry>
+</feed>

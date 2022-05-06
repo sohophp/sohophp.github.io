@@ -9,16 +9,23 @@
     <category term="CRM" />
     <category term="CentOS" />
     <category term="CentOS7" />
-    <category term="SSL" />
     <category term="Apache" />
+    <category term="Httpd" />
+    <category term="PHP7" />
+    <category term="PHP7.2" />
+    <category term="MySQL" />
+    <category term="MariaDB" />
+    <category term="PHP-FPM" />
+    <category term="SSL" />
     <category term="Https" />
     <category term="Linux" />
     <category term="Centos" />
     <category term="ModSecurity" />
     <category term="CRS" />
-    <category term="Httpd" />
     <category term="SELinux" />
-    <category term="Visual Sudio Code" />
+    <category term="Ubuntu,WSL" />
+    <category term="WSL" />
+    <category term="Ubuntu" />
     <category term="docker" />
     <category term="Docker" />
     <category term="Hexo" />
@@ -26,11 +33,6 @@
     <category term="php" />
     <category term="ubuntu" />
     <category term="linux" />
-    <category term="PHP7" />
-    <category term="PHP7.2" />
-    <category term="MySQL" />
-    <category term="MariaDB" />
-    <category term="PHP-FPM" />
     <entry>
         <id>https://www.sohophp.app/2021/01/21/hexo/</id>
         <title>什么是 Hexo？</title>
