@@ -128,6 +128,19 @@ $ sudo /etc/init.d/php8.1-fpm start
 #     SetHandler "proxy:fcgi://127.0.0.1:9001"
 # </FilesMatch>
 
+# 切換 php-cli 版本
+# 为了和CentOS的php81同名
+# sudo ln -s /usr/bin/php8.1 /usr/bin/php81
+
+# 切换到php7.2
+$ sudo update-alternatives --set php /usr/bin/php7.2
+# 或者
+$ sudo ln -sf /usr/bin/php7.2 /etc/alternatives/php
+# 切换到php8.1
+$ sudo update-alternatives --set php /usr/bin/php8.1
+# 或者
+$ sudo ln -sf /usr/bin/php8.1 /etc/alternatives/php
+
 ```
 
 ### 测试是否正常
@@ -146,21 +159,10 @@ $ netstat -a
 ### 安装 composer
 
 ```bash
-$ curl  https://getcomposer.org/installer -o composer-setup.php
-$ php composer-setup.php
-$ chmod +x composer.phar
-$ sudo mv composer.phar /usr/local/bin/composer
-# 切換 php-cli 版本
-
-
-# 切换到php7.2
-$ sudo update-alternatives --set php /usr/bin/php7.2
-# 或者
-$ sudo ln -sf /usr/bin/php7.2 /etc/alternatives/php
-# 切换到php8.1
-$ sudo update-alternatives --set php /usr/bin/php8.1
-# 或者
-$ sudo ln -sf /usr/bin/php8.1 /etc/alternatives/php
+curl  https://getcomposer.org/installer -o composer-setup.php
+php composer-setup.php
+chmod +x composer.phar
+sudo mv composer.phar /usr/local/bin/composer
 ```
 
 ### 安装 GIT
