@@ -142,10 +142,15 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install sendmail</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ sudo apt install postfix</span><br></pre></td></tr></table></figure>
 
+<ol start="5">
+<li>ORDER BY clause is not in GROUP BY clause and contains nonaggregated</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 查看MySQL 的 sql_mode</span><br><span class="line">mysql &gt; select @@sql_mode;</span><br><span class="line"># 默认值</span><br><span class="line"># ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br><span class="line"># 原因是MySQL被Oracle收购后从MySQL5.7开始这个 ONLY_FULL_GROUP_BY 和 Oracle 一样，要求 SELECT 列一定要在 GROUP BY 中 ，或者本身是聚合列(SUM,AVG,MAX,MIN) </span><br><span class="line"># 去掉 ONLY_FULL_GROUP_BY 解除限制</span><br><span class="line"># 如果出现 Invalid datetime format: 1292 Incorrect datetime value: &#x27;0000-00-00 00:00:00&#x27; </span><br><span class="line"># 去掉 NO_ZERO_IN_DATE,NO_ZERO_DATE ，或者把 0000-00-00 00:00:00 改成 NULL或者&#x27;1970-01-01 08:00:00&#x27;</span><br><span class="line">$ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line"># 如果没有sql_mode加一行</span><br><span class="line">sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br><span class="line">$ sudo /etc/init.d/mysql restart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2022/04/30/Ubuntu20-04%E5%AE%89%E8%A3%85PHP7-2%E5%92%8CPHP8-1/" data-id="cl2xj198g000e9tirepe637w3" data-title="WSL-Ubuntu20.04 安装 Apache2.4 + MySQL8.0 + PHP7.2 和 PHP8.1 ,composer,git 开发环境" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2022/04/30/Ubuntu20-04%E5%AE%89%E8%A3%85PHP7-2%E5%92%8CPHP8-1/" data-id="cl3uerdl4000e9kt2c8q74ygz" data-title="WSL-Ubuntu20.04 安装 Apache2.4 + MySQL8.0 + PHP7.2 和 PHP8.1 ,composer,git 开发环境" class="article-share-link">Share</a>
       
       
       
@@ -194,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/" data-id="cl2xj198f000d9tir7be0dxpf" data-title="Ubuntu (WSL) chmod(): Operation not permitted" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2022/04/29/Ubuntu-WSL-chmod-Operation-not-permitted/" data-id="cl3uerdl3000d9kt228vz5h3z" data-title="Ubuntu (WSL) chmod(): Operation not permitted" class="article-share-link">Share</a>
       
       
       
@@ -246,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/07/06/it-is-okay/" data-id="cl2xj198r000w9tir8hb0bb3y" data-title="it&#39;is okay" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/07/06/it-is-okay/" data-id="cl3uerdle000w9kt29p6ahpl3" data-title="it&#39;is okay" class="article-share-link">Share</a>
       
       
       
@@ -354,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/05/21/docker-ubuntu-postfix-mysql/" data-id="cl2xj198l000j9tir3ktthyo3" data-title="ubuntu下安装postfix+mysql+dovecot" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/05/21/docker-ubuntu-postfix-mysql/" data-id="cl3uerdl8000j9kt28osr7oun" data-title="ubuntu下安装postfix+mysql+dovecot" class="article-share-link">Share</a>
       
       
       
@@ -397,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/05/03/ubuntu20-install-php7-2/" data-id="cl2xj198t00129tir3i4abhqq" data-title="ubuntu20 install php7.2" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/05/03/ubuntu20-install-php7-2/" data-id="cl3uerdlg00129kt28tm5fhey" data-title="ubuntu20 install php7.2" class="article-share-link">Share</a>
       
       
       
@@ -447,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/03/03/docker/" data-id="cl2xj198o000q9tir2cxl0c0l" data-title="docker" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/03/03/docker/" data-id="cl3uerdlc000q9kt2fiuza3gx" data-title="docker" class="article-share-link">Share</a>
       
       
       
@@ -503,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/" data-id="cl2xj198n000o9tir3rpd2mvw" data-title="docker 减小体积生成新的镜像" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/27/docker-%E5%87%8F%E5%B0%8F%E4%BD%93%E7%A7%AF%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F/" data-id="cl3uerdla000o9kt210ok1yxr" data-title="docker 减小体积生成新的镜像" class="article-share-link">Share</a>
       
       
       
@@ -556,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/26/ubuntu20-001/" data-id="cl2xj198s000z9tir6t547isa" data-title="ubuntu20-001" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/26/ubuntu20-001/" data-id="cl3uerdlf000z9kt2893p9klm" data-title="ubuntu20-001" class="article-share-link">Share</a>
       
       
       
@@ -614,7 +619,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/26/centos7-make-install-apache2-4-and-php7-2/" data-id="cl2xj198j000h9tir3v3497nv" data-title="centos7 make install apache2.4 and php7.2" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/26/centos7-make-install-apache2-4-and-php7-2/" data-id="cl3uerdl7000h9kt27efg4wlq" data-title="centos7 make install apache2.4 and php7.2" class="article-share-link">Share</a>
       
       
       
@@ -665,7 +670,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="cl2xj198c000a9tirgu439ndb" data-title="SELinux" class="article-share-link">Share</a>
+      <a data-url="https://www.sohophp.app/2021/02/07/SELinux/" data-id="cl3uerdl0000a9kt2b47qhoiw" data-title="SELinux" class="article-share-link">Share</a>
       
       
       
