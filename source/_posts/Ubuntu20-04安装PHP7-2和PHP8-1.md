@@ -249,20 +249,34 @@ $ sudo apt install sendmail
 $ sudo apt install postfix
 ```
 
-5. ORDER BY clause is not in GROUP BY clause and contains nonaggregated
+5. sql_mode 引起的SQL错误 （应该是旧SQL语法不够严谨）
 
 ```
 # 查看MySQL 的 sql_mode
 mysql > select @@sql_mode;
 # 默认值
 # ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
-# 原因是MySQL被Oracle收购后从MySQL5.7开始这个 ONLY_FULL_GROUP_BY 和 Oracle 一样，要求 SELECT 列一定要在 GROUP BY 中 ，或者本身是聚合列(SUM,AVG,MAX,MIN) 
-# 去掉 ONLY_FULL_GROUP_BY 解除限制
-# 如果出现 Invalid datetime format: 1292 Incorrect datetime value: '0000-00-00 00:00:00' 
-# 去掉 NO_ZERO_IN_DATE,NO_ZERO_DATE ，或者把 0000-00-00 00:00:00 改成 NULL或者'1970-01-01 08:00:00'
+```
+
+*** ORDER BY clause is not in GROUP BY clause and contains nonaggregated ***
+
+> 原因： MySQL被Oracle收购后从MySQL5.7开始这个 ONLY_FULL_GROUP_BY 和 Oracle 一样，要求 SELECT 列一定要在 GROUP BY 中 ，或者本身是聚合列(SUM,AVG,MAX,MIN) 
+> 解决办法：去掉 ONLY_FULL_GROUP_BY 解除限制
+
+*** Invalid datetime format: 1292 Incorrect datetime value: '0000-00-00 00:00:00' ***
+
+> 原因 ：timestamp 要求 '1970-01-01 08:00:00' 开始的时间格式或者 NULL
+> 解决办法： 去掉 NO_ZERO_IN_DATE,NO_ZERO_DATE ，或者把 0000-00-00 00:00:00 改成 NULL 或者 '1970-01-01 08:00:00'
+
+*** SQLSTATE[HY000]: General error: 1366 Incorrect integer value: \'\' for column ... ***
+
+> 原因： INT 类型不能给 "" 空值，
+> 解决办法： 改成INT值，或者去掉 STRICT_TRANS_TABLES
+
+```bash
 $ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
 # 如果没有sql_mode加一行
-sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
 $ sudo /etc/init.d/mysql restart
 
 ```
